@@ -42,3 +42,7 @@ python manage.py migrate
 
 1. Start application using command, `python manage.py runserver`
 1. Navigate browser to [http://localhost:8000](http://localhost:8000)
+
+## Entity Relationship Diagram
+
+![SONGWRYTR ERD](./SONGWRYTR_ERD.png)
