@@ -4,7 +4,7 @@ A back-end capstone project from [Landon Morgan](https://github.com/iandonmorgan
 
 ## Brief Proposal
 
-`Songwriters create intellectual property in the form of songs. This app will solve the problem of tracking information associated with creating this IP, including co-writer(s), percentage split(s), publisher(s), performance rights organization(s), and licensing contact information, specific to each user (songwriter).`
+Songwriters create intellectual property in the form of songs. This app will solve the problem of tracking information associated with creating this IP, including co-writer(s), percentage split(s), publisher(s), performance rights organization(s), and licensing contact information, specific to each user (songwriter).
 
 ## Project Definition
 
