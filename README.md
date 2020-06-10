@@ -33,15 +33,15 @@ pip freeze > requirements.txt
 ```
 > Note the separate formats for the `source` command between Windows and Mac users. You will use this command each time you activate your virtual environment for this project.
 
-1. Run a database migration using the `migrate` command, below, to create a set of tables that Django maintains for user management.
+3. Run a database migration using the `migrate` command, below, to create a set of tables that Django maintains for user management.
 
 ```sh
 python manage.py makemigrations songwrytrapp
 python manage.py migrate
 ```
 
-1. Start application using command, `python manage.py runserver`
-1. Navigate browser to [http://localhost:8000](http://localhost:8000)
+4. Start application using command, `python manage.py runserver`
+4. Navigate browser to [http://localhost:8000](http://localhost:8000)
 
 ## Entity Relationship Diagram
 
