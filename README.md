@@ -19,15 +19,15 @@ Steps to get started:
 
 #### Mac users, run the following:
 ```sh
-python -m venv libraryenv
-source ./libraryenv/bin/activate
+python -m venv songwrytrenv
+source ./songwrytrenv/bin/activate
 pip install django
 pip freeze > requirements.txt
 ```
 #### Windows users, run the following:
 ```sh
-python -m venv libraryenv
-source ./libraryenv/Scripts/activate
+python -m venv songwrytrenv
+source ./songwrytrenv/Scripts/activate
 pip install django
 pip freeze > requirements.txt
 ```
