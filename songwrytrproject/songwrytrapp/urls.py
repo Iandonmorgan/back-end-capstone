@@ -4,6 +4,6 @@ from .views import *
 app_name = "songwrytrapp"
 
 urlpatterns = [
-    path('', writer_list, name='home'),
+    path('', home, name='home'),
     path('writers/', writer_list, name='writers'),
 ]
