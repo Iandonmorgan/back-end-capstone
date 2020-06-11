@@ -3,7 +3,9 @@ from django.shortcuts import render
 from songwrytrapp.models import Writer
 from ..connection import Connection
 from songwrytrapp.models import model_factory
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def writer_list(request):
     if request.method == 'GET':
         with sqlite3.connect(Connection.db_path) as conn:
