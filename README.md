@@ -40,6 +40,7 @@ python manage.py makemigrations songwrytrapp
 python manage.py migrate
 ```
 
+4. Load Performance Rights Organization fixtures by using command, `python manage.py loaddata PROs`
 4. Start application using command, `python manage.py runserver`
 4. Navigate browser to [http://localhost:8000](http://localhost:8000)
 
