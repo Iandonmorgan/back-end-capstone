@@ -1,0 +1,19 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>SONGWRYTR</title>
+  </head>
+  <body>
+    <h1>Writers</h1>
+
+    <ol>
+    {% for writer in all_writers %}
+        <li>
+            {{ writer.last_name }}, {{ writer.first_name }}
+        </li>
+    {% endfor %}
+    </ol>
+  </body>
+</html>
