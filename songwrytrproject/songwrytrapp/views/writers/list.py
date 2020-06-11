@@ -12,11 +12,7 @@ def writer_list(request):
 
             db_cursor.execute("""
             SELECT
-                w.id,
-                w.first_name,
-                w.last_name,
-                w.publishing_notes,
-                w.user_id
+                w.*
             FROM songwrytrapp_writer w
             """)
 
