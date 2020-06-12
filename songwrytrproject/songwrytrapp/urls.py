@@ -8,4 +8,5 @@ urlpatterns = [
     path('writers/', writer_list, name='writers'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('logout/', logout_user, name='logout'),
+    path('writer/form', writer_form, name='writer_form'),
 ]
