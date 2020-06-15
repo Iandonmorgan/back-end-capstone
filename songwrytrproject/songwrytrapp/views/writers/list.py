@@ -1,5 +1,5 @@
 import sqlite3
-from django.shortcuts import render
+from django.shortcuts import render, redirect, reverse
 from songwrytrapp.models import Writer
 from ..connection import Connection
 from songwrytrapp.models import model_factory
@@ -16,6 +16,7 @@ def writer_list(request):
             SELECT
                 w.*
             FROM songwrytrapp_writer w
+            ORDER BY w.last_name
             """)
 
             all_writers = db_cursor.fetchall()
@@ -26,3 +27,21 @@ def writer_list(request):
         }
 
         return render(request, template, context)
+    elif request.method == 'POST':
+        form_data = request.POST
+
+        with sqlite3.connect(Connection.db_path) as conn:
+            db_cursor = conn.cursor()
+
+            db_cursor.execute("""
+            INSERT INTO songwrytrapp_writer
+            (
+                first_name, last_name, publishing_notes, user_id
+            )
+            VALUES (?, ?, ?, ?)
+            """,
+            (form_data['first_name'], form_data['last_name'],
+                form_data['publishing_notes'],
+                request.user.id))
+
+        return redirect(reverse('songwrytrapp:writers'))
