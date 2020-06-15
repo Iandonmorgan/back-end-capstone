@@ -18,7 +18,11 @@
             <li class="navList__route"><a href="{% url 'songwrytrapp:writers' %}">Writers</a></li>
             <li class="navList__route"><a href="{% url 'songwrytrapp:writers' %}">Compositions</a></li>
             <li class="navList__route"><a href="{% url 'songwrytrapp:writers' %}">Publishing</a></li>
+            {% if request.user.id %}
             <li class="navList__route"><a href="{% url 'songwrytrapp:logout' %}">Logout</a></li>
+            {% else %}
+            <li class="navList__route"><a href="{% url 'songwrytrapp:login' %}">Login</a></li>
+            {% endif %}
         </ol>
     </nav>
 
