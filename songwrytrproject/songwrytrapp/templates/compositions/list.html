@@ -1,0 +1,22 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'styles/writers.css' %}" />
+{% endblock %}
+
+{% block content %}
+    <h1>Writers</h1>
+        <a href="{% url 'songwrytrapp:writer_form' %}">Add Writer</a>
+    <ol>
+    {% for writer in all_writers %}
+        {% if request.user.id == writer.user_id %}
+            <li>
+                <a href="{% url 'songwrytrapp:writer' writer.id %}">
+                {{ writer.last_name }}, {{ writer.first_name }}
+                </a>
+            </li>
+        {% endif %}
+    {% endfor %}
+    </ol>
+{% endblock %}

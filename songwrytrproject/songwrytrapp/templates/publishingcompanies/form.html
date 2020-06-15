@@ -1,0 +1,36 @@
+{% extends 'shared/base.html' %}
+
+{% block content %}
+    <h1>Publishing Company</h1>
+
+
+    {% if publishingcompany.id is not None %}
+        <form action="{% url 'songwrytrapp:publishingcompany' publishingcompany.id %}" method="post">
+          <input type="hidden" name="actual_method" value="PUT">
+    {% else %}
+        <form action="{% url 'songwrytrapp:publishingcompanies' %}" method="post">
+    {% endif %}
+      {% csrf_token %}
+      <fieldset>
+          <label for="name">Name: </label>
+          <input id="name" type="text" name="name" value="{{publishingcompany.name}}">
+      </fieldset>
+      <fieldset>
+          <label for="pro">PRO: </label>
+          <select id="pro" type="text" name="pro">
+                {% for pro in all_pros %}
+                    <option value="{{ pro.id }}">{{ pro.name }} ({{ pro.city }}, {{ pro.state }})</option>
+                {% endfor %}
+          </select>
+      </fieldset>
+      <fieldset>
+          <label for="pro_acct_num">PRO Account Number (IPI/CAE): </label>
+          <input id="pro_acct_num" type="text" name="pro_acct_num" value="{{publishingcompany.pro_acct_num}}">
+      </fieldset>
+      <fieldset>
+          <label for="admin">Administration: </label>
+          <input id="admin" type="text" name="admin" value="{{publishingcompany.admin}}">
+      </fieldset>
+      <input type="submit" value="Submit" />
+    </form>
+{% endblock %}
