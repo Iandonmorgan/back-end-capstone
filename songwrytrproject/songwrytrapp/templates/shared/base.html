@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>SONGWRYTR</title>
+    <link rel="stylesheet" href="{% static 'styles/base.css' %}" />
+    {% block css %}
+    {% endblock %}
+</head>
+
+<body>
+
+    <nav id="site-nav">
+        <ol class="navList">
+            <li class="navList__route"><a href="{% url 'songwrytrapp:home'%}"><img src="{% static "img/songwrytr_logo_sm.png" %}" alt="SONGWRYTR" height="50px"></a></li>
+            <li class="navList__route"><a href="{% url 'songwrytrapp:writers' %}">Writers</a></li>
+            <li class="navList__route"><a href="{% url 'songwrytrapp:writers' %}">Compositions</a></li>
+            <li class="navList__route"><a href="{% url 'songwrytrapp:writers' %}">Publishing</a></li>
+            <li class="navList__route"><a href="{% url 'songwrytrapp:logout' %}">Logout</a></li>
+        </ol>
+    </nav>
+
+    <main class="main-content">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    {% block scripts %}
+    {% endblock scripts %}
+</body>
+
+</html>

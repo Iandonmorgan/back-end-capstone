@@ -1,29 +1,28 @@
-{% load static %}
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>SONGWRYTR</title>
-  </head>
-  <body>
+{% extends 'shared/base.html' %}
+
+{% block content %}
     <h1>Writer</h1>
 
 
-    <form action="{% url 'songwrytrapp:writers' %}" method="post">
+    {% if writer.id is not None %}
+        <form action="{% url 'songwrytrapp:writer' writer.id %}" method="post">
+          <input type="hidden" name="actual_method" value="PUT">
+    {% else %}
+        <form action="{% url 'songwrytrapp:writers' %}" method="post">
+    {% endif %}
       {% csrf_token %}
       <fieldset>
           <label for="first_name">First Name: </label>
-          <input id="first_name" type="text" name="first_name">
+          <input id="first_name" type="text" name="first_name" value="{{writer.first_name}}">
       </fieldset>
       <fieldset>
           <label for="last_name">Last Name: </label>
-          <input id="last_name" type="text" name="last_name">
+          <input id="last_name" type="text" name="last_name" value="{{writer.last_name}}">
       </fieldset>
       <fieldset>
           <label for="publishing_notes">Publishing Notes: </label>
-          <textarea id="publishing_notes" type="text" name="publishing_notes" rows="5" cols="30"></textarea>
+          <textarea id="publishing_notes" type="text" name="publishing_notes" rows="5" cols="30">{{writer.publishing_notes}}</textarea>
       </fieldset>
       <input type="submit" value="Submit" />
     </form>
-  </body>
-</html>
+{% endblock %}
