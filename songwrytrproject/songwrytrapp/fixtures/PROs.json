@@ -250,5 +250,17 @@
             "zipcode": "M3B 2S6",
             "website": "http://www.socan.com/"
         }
+    },
+    {
+        "model": "songwrytrapp.pro",
+        "pk": 22,
+        "fields": {
+            "name": "Other",
+            "address": "n/a",
+            "city": "n/a",
+            "state": "n/a",
+            "zipcode": "n/a",
+            "website": "n/a"
+        }
     }
 ]
