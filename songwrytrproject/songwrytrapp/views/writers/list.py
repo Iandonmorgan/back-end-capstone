@@ -36,11 +36,12 @@ def writer_list(request):
             db_cursor.execute("""
             INSERT INTO songwrytrapp_writer
             (
-                first_name, last_name, publishing_notes, user_id
+                first_name, last_name, pro_id, pro_ipi, publishing_notes, user_id
             )
-            VALUES (?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?, ?)
             """,
             (form_data['first_name'], form_data['last_name'],
+                form_data['pro'], form_data['pro_ipi'],
                 form_data['publishing_notes'],
                 request.user.id))
 

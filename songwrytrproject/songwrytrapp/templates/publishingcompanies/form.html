@@ -23,7 +23,14 @@
                     {% if pro.id == publishingcompany.pro_id %}
                         selected
                     {% endif %}
-                    >{{ pro.name }} ({{ pro.city }}, {{ pro.state }})</option>
+                    >{{ pro.name }}
+                    {% if pro.zipcode == "10019" %}
+                        ({{ pro.city }} (Midtown), {{ pro.state }})</option>
+                    {% elif pro.zipcode == "10005" %}
+                        ({{ pro.city }} (Downtown), {{ pro.state }})</option>
+                    {% else %}
+                        ({{ pro.city }}, {{ pro.state }})</option>
+                    {% endif %}
                 {% endfor %}
           </select>
       </fieldset>

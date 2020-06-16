@@ -27,7 +27,14 @@
                     {% if pro.id == writer.pro_id %}
                         selected
                     {% endif %}
-                    >{{ pro.name }} ({{ pro.city }}, {{ pro.state }})</option>
+                    >{{ pro.name }} 
+                    {% if pro.zipcode == "10019" %}
+                        ({{ pro.city }} (Midtown), {{ pro.state }})</option>
+                    {% elif pro.zipcode == "10005" %}
+                        ({{ pro.city }} (Downtown), {{ pro.state }})</option>
+                    {% else %}
+                        ({{ pro.city }}, {{ pro.state }})</option>
+                    {% endif %}
                 {% endfor %}
           </select>
       </fieldset>
@@ -36,7 +43,7 @@
           <input id="pro_ipi" type="text" name="pro_ipi" value="{{writer.pro_ipi}}">
       </fieldset>
       <fieldset>
-          <label for="publishing_notes">Publishing Notes: </label>
+          <label for="publishing_notes">Notes: </label>
           <textarea id="publishing_notes" type="text" name="publishing_notes" rows="5" cols="30">{{writer.publishing_notes}}</textarea>
       </fieldset>
       <input type="submit" value="Submit" />

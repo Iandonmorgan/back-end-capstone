@@ -5,7 +5,7 @@
     <h1>{{ writer.first_name }} {{ writer.last_name }}</h1>
     <div>PRO: {{ writer.pro.name }}</div>
     <div>PRO IPI: {{ writer.pro_ipi }}</div>
-    <div>Publishing Notes: {{ writer.publishing_notes }}</div>
+    <div>Notes: {{ writer.publishing_notes }}</div>
     <div className="details-buttons">
       <form action="{% url 'songwrytrapp:writer' writer.id %}" method="POST">
         {% csrf_token %}
