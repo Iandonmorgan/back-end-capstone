@@ -42,11 +42,11 @@ def publishingcompany_list(request):
             db_cursor.execute("""
             INSERT INTO songwrytrapp_publishingcompany
             (
-                name, pro_acct_num, admin, user_id
+                name, pro_id, pro_acct_num, admin, user_id
             )
-            VALUES (?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?)
             """,
-            (form_data['name'], form_data['pro_acct_num'],
+            (form_data['name'], form_data['pro'], form_data['pro_acct_num'],
                 form_data['admin'],
                 request.user.id))
 

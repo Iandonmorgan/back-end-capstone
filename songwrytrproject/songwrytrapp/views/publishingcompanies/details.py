@@ -59,12 +59,13 @@ def publishingcompany_details(request, publishingcompany_id):
                 db_cursor.execute("""
                 UPDATE songwrytrapp_publishingcompany
                 SET name = ?,
+                    pro_id = ?,
                     pro_acct_num = ?,
                     admin = ?
-                WHERE id = ?
+                WHERE id = ?;
                 """,
                 (
-                    form_data['name'], form_data['pro_acct_num'],
+                    form_data['name'], form_data['pro'], form_data['pro_acct_num'],
                     form_data['admin'], 
                     publishingcompany_id,
                 ))
