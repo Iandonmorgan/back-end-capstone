@@ -20,6 +20,18 @@
           <input id="last_name" type="text" name="last_name" value="{{writer.last_name}}">
       </fieldset>
       <fieldset>
+          <label for="pro">PRO: </label>
+          <select id="pro" type="text" name="pro">
+                {% for pro in all_pros %}
+                    <option value="{{ pro.id }}">{{ pro.name }} ({{ pro.city }}, {{ pro.state }})</option>
+                {% endfor %}
+          </select>
+      </fieldset>
+      <fieldset>
+          <label for="pro_ipi">PRO IPI: </label>
+          <input id="pro_ipi" type="text" name="pro_ipi" value="{{publishingcompany.pro_ipi}}">
+      </fieldset>
+      <fieldset>
           <label for="publishing_notes">Publishing Notes: </label>
           <textarea id="publishing_notes" type="text" name="publishing_notes" rows="5" cols="30">{{writer.publishing_notes}}</textarea>
       </fieldset>

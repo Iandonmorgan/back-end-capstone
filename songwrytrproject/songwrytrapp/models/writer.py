@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from .pro import PRO
 
 class Writer(models.Model):
 
@@ -7,6 +8,8 @@ class Writer(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     publishing_notes = models.CharField(max_length=255)
+    pro = models.ForeignKey(PRO, on_delete=models.CASCADE)
+    pro_acct_num = models.IntegerField()
 
     class Meta:
         verbose_name = ("writer ")
