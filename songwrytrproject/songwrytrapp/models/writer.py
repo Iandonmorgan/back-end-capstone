@@ -9,7 +9,7 @@ class Writer(models.Model):
     last_name = models.CharField(max_length=50)
     publishing_notes = models.CharField(max_length=255)
     pro = models.ForeignKey(PRO, on_delete=models.CASCADE)
-    pro_acct_num = models.IntegerField()
+    pro_ipi = models.IntegerField()
 
     class Meta:
         verbose_name = ("writer ")

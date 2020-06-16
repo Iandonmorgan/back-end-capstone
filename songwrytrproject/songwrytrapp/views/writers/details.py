@@ -60,11 +60,14 @@ def writer_details(request, writer_id):
                 UPDATE songwrytrapp_writer
                 SET first_name = ?,
                     last_name = ?,
+                    pro_id = ?,
+                    pro_ipi = ?,
                     publishing_notes = ?
                 WHERE id = ?
                 """,
                 (
                     form_data['first_name'], form_data['last_name'],
+                    form_data['pro'], form_data['pro_ipi'],
                     form_data['publishing_notes'], 
                     writer_id,
                 ))

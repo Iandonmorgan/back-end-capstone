@@ -20,7 +20,7 @@ def get_writers():
             p.zipcode as 'PRO_Zipcode'
         FROM songwrytrapp_writer w
         JOIN songwrytrapp_pro p
-        ON pc.pro_id = p.id
+        ON w.pro_id = p.id
         """)
 
         return db_cursor.fetchall()
