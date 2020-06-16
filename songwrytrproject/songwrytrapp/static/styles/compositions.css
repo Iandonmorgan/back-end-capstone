@@ -1,0 +1,26 @@
+.compositions {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.composition {
+    flex-basis: 20%;
+    padding: 0 2em 0.5em 2em;
+    border: 1px solid gray;
+    margin: 1em;
+    padding: 1.5em;
+}
+
+.composition__title {
+    font-size: 1.1em;
+}
+
+.composition__description {
+    font-size: 0.75em;
+}
+
+.indent {
+    margin-left: 50px;
+}

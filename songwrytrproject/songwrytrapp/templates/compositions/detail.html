@@ -1,13 +1,20 @@
 {% extends 'shared/base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'styles/compositions.css' %}" />
+{% endblock %}
 
 {% block content %}
   {% if request.user.id == composition.user_id %}
     <h1>{{ composition.title }}</h1>
-    <div>Alternate Titles: {{ composition.alt_titles }}</div>
+    {% if composition.alt_titles %}
+      <div>Alternate Titles: {{ composition.alt_titles }}</div>
+    {% endif %}
     <div>Date Created: {{ composition.date_created }}</div>
-    <div>Notes: {{ composition.notes }}</div>
-    <div>Lyrics: {{ composition.lyrics }}</div>
-    <div className="details-buttons">
+    <div>Notes: {{ composition.notes|linebreaksbr }}</div>
+    <div>Lyrics:<div class="indent">{{ composition.lyrics|linebreaks }}</div></div>
+    <div class="details-buttons">
       <form action="{% url 'songwrytrapp:composition' composition.id %}" method="POST">
         {% csrf_token %}
         <input type="hidden" name="actual_method" value="DELETE">

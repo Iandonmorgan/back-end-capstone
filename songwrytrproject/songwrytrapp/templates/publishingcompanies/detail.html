@@ -6,7 +6,7 @@
     <div>PRO: {{ publishingcompany.pro.name }} ({{ publishingcompany.pro.city }}, {{ publishingcompany.pro.state }})</div>
     <div>PRO Account Number: {{ publishingcompany.pro_acct_num }}</div>
     <div>Administrator: {{ publishingcompany.admin }}</div>
-    <div className="details-buttons">
+    <div class="details-buttons">
       <form action="{% url 'songwrytrapp:publishingcompany' publishingcompany.id %}" method="POST">
         {% csrf_token %}
         <input type="hidden" name="actual_method" value="DELETE">

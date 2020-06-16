@@ -1,12 +1,17 @@
 {% extends 'shared/base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'styles/writers.css' %}" />
+{% endblock %}
 
 {% block content %}
   {% if request.user.id == writer.user_id %}
     <h1>{{ writer.first_name }} {{ writer.last_name }}</h1>
     <div>PRO: {{ writer.pro.name }}</div>
     <div>PRO IPI: {{ writer.pro_ipi }}</div>
-    <div>Notes: {{ writer.publishing_notes }}</div>
-    <div className="details-buttons">
+    <div>Notes: {{ writer.publishing_notes|linebreaks }}</div>
+    <div class="details-buttons">
       <form action="{% url 'songwrytrapp:writer' writer.id %}" method="POST">
         {% csrf_token %}
         <input type="hidden" name="actual_method" value="DELETE">

@@ -13,7 +13,13 @@ def get_composition(composition_id):
 
         db_cursor.execute("""
         SELECT
-            c.*
+            c.id,
+            c.title,
+            c.alt_titles,
+            c.lyrics,
+            c.notes,
+            STRFTIME('%m/%d/%Y',c.date_created) as date_created,
+            c.user_id
         FROM songwrytrapp_composition c
         WHERE c.id = ?
         """, (composition_id,))
