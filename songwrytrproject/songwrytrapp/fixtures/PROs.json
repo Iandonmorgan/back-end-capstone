@@ -238,5 +238,17 @@
             "zipcode": "80801",
             "website": "https://www.sesac.com/"
         }
+    },
+    {
+        "model": "songwrytrapp.pro",
+        "pk": 21,
+        "fields": {
+            "name": "SOCAN",
+            "address": "41 Valleybrook Drive",
+            "city": "Toronto",
+            "state": "ON",
+            "zipcode": "M3B 2S6",
+            "website": "http://www.socan.com/"
+        }
     }
 ]

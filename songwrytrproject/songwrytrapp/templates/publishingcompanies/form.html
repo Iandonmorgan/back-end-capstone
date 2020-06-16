@@ -19,7 +19,11 @@
           <label for="pro">PRO: </label>
           <select id="pro" type="text" name="pro">
                 {% for pro in all_pros %}
-                    <option value="{{ pro.id }}">{{ pro.name }} ({{ pro.city }}, {{ pro.state }})</option>
+                    <option value="{{ pro.id }}"
+                    {% if pro.id == publishingcompany.pro_id %}
+                        selected
+                    {% endif %}
+                    >{{ pro.name }} ({{ pro.city }}, {{ pro.state }})</option>
                 {% endfor %}
           </select>
       </fieldset>
@@ -28,7 +32,7 @@
           <input id="pro_acct_num" type="text" name="pro_acct_num" value="{{publishingcompany.pro_acct_num}}">
       </fieldset>
       <fieldset>
-          <label for="admin">Administration: </label>
+          <label for="admin">Administrator: </label>
           <input id="admin" type="text" name="admin" value="{{publishingcompany.admin}}">
       </fieldset>
       <input type="submit" value="Submit" />

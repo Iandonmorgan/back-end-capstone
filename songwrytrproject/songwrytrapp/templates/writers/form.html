@@ -23,13 +23,17 @@
           <label for="pro">PRO: </label>
           <select id="pro" type="text" name="pro">
                 {% for pro in all_pros %}
-                    <option value="{{ pro.id }}">{{ pro.name }} ({{ pro.city }}, {{ pro.state }})</option>
+                    <option value="{{ pro.id }}" 
+                    {% if pro.id == writer.pro_id %}
+                        selected
+                    {% endif %}
+                    >{{ pro.name }} ({{ pro.city }}, {{ pro.state }})</option>
                 {% endfor %}
           </select>
       </fieldset>
       <fieldset>
           <label for="pro_ipi">PRO IPI: </label>
-          <input id="pro_ipi" type="text" name="pro_ipi" value="{{publishingcompany.pro_ipi}}">
+          <input id="pro_ipi" type="text" name="pro_ipi" value="{{writer.pro_ipi}}">
       </fieldset>
       <fieldset>
           <label for="publishing_notes">Publishing Notes: </label>
