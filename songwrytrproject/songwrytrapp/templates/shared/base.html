@@ -17,7 +17,7 @@
             <li class="navList__route"><a href="{% url 'songwrytrapp:home'%}"><img src="{% static "img/songwrytr_logo_sm.png" %}" alt="SONGWRYTR" height="50px"></a></li>
             <li class="navList__route"><a href="{% url 'songwrytrapp:writers' %}">Writers</a></li>
             <li class="navList__route"><a href="{% url 'songwrytrapp:writers' %}">Compositions</a></li>
-            <li class="navList__route"><a href="{% url 'songwrytrapp:writers' %}">Publishing</a></li>
+            <li class="navList__route"><a href="{% url 'songwrytrapp:publishingcompanies' %}">Publishing</a></li>
             {% if request.user.id %}
             <li class="navList__route"><a href="{% url 'songwrytrapp:logout' %}">Logout</a></li>
             {% else %}

@@ -1,26 +1,26 @@
 import sqlite3
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from songwrytrapp.models import Writer, PRO, model_factory
+from songwrytrapp.models import PublishingCompany, PRO, model_factory
 from ..connection import Connection
-from .details import get_writer
+from .details import get_publishingcompany
 
 
-def get_writers():
+def get_publishingcompanies():
     with sqlite3.connect(Connection.db_path) as conn:
-        conn.row_factory = model_factory(Writer)
+        conn.row_factory = model_factory(PublishingCompany)
         db_cursor = conn.cursor()
 
         db_cursor.execute("""
         SELECT
-            w.*,
+            pc.*,
             p.name as 'PRO_Name',
             p.city as 'PRO_City',
             p.state as 'PRO_State',
             p.zipcode as 'PRO_Zipcode'
-        FROM songwrytrapp_writer w
+        FROM songwrytrapp_publishingcompany pc
         JOIN songwrytrapp_pro p
-        ON w.pro_id = p.id
+        ON pc.pro_id = p.id
         """)
 
         return db_cursor.fetchall()
@@ -39,29 +39,29 @@ def get_pros():
         return db_cursor.fetchall()
 
 @login_required
-def writer_form(request):
+def publishingcompany_form(request):
     if request.method == 'GET':
-        writers = get_writers()
+        publishingcompanies = get_publishingcompanies()
         pros = get_pros()
-        template = 'writers/form.html'
+        template = 'publishingcompanies/form.html'
         context = {
-            'all_writers': writers,
+            'all_publishingcompanies': publishingcompanies,
             'all_pros': pros
         }
 
         return render(request, template, context)
 
 @login_required
-def writer_edit_form(request, writer_id):
+def publishingcompany_edit_form(request, publishingcompany_id):
 
     if request.method == 'GET':
-        writer = get_writer(writer_id)
-        writers = get_writers()
+        publishingcompany = get_publishingcompany(publishingcompany_id)
+        publishingcompanies = get_publishingcompanies()
         pros = get_pros()
-        template = 'writers/form.html'
+        template = 'publishingcompanies/form.html'
         context = {
-            'writer': writer,
-            'all_writers': writers,
+            'publishingcompany': publishingcompany,
+            'all_publishingcompanies': publishingcompanies,
             'all_pros': pros
         }
 

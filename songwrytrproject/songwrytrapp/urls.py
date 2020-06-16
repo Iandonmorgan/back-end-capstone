@@ -5,10 +5,14 @@ app_name = "songwrytrapp"
 
 urlpatterns = [
     path('', home, name='home'),
-    path('writers/', writer_list, name='writers'),
     path('accounts/', include('django.contrib.auth.urls'), name='login'),
     path('logout/', logout_user, name='logout'),
+    path('writers/', writer_list, name='writers'),
     path('writer/form', writer_form, name='writer_form'),
     path('writers/<int:writer_id>/form/', writer_edit_form, name='writer_edit_form'),
     path('writers/<int:writer_id>/', writer_details, name='writer'),
+    path('publishingcompanies/', publishingcompany_list, name='publishingcompanies'),
+    path('publishingcompany/form', publishingcompany_form, name='publishingcompany_form'),
+    path('publishingcompanies/<int:publishingcompany_id>/form/', publishingcompany_edit_form, name='publishingcompany_edit_form'),
+    path('publishingcompanies/<int:publishingcompany_id>/', publishingcompany_details, name='publishingcompany'),
 ]

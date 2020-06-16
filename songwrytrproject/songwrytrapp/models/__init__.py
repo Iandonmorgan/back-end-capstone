@@ -5,4 +5,5 @@ from .publishingCompany import PublishingCompany
 from .compositionWriter import CompositionWriter
 from .compositionRecording import CompositionRecording
 from .compositionPublishing import CompositionPublishing
+from .pro import PRO
 from .modelfactory import model_factory

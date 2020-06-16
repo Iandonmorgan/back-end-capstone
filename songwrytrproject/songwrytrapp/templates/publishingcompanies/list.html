@@ -1,0 +1,22 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'styles/publishingcompanies.css' %}" />
+{% endblock %}
+
+{% block content %}
+    <h1>Publishing Companies</h1>
+        <a href="{% url 'songwrytrapp:publishingcompany_form' %}">Add Publishing Company</a>
+    <ol>
+    {% for publishingcompany in all_publishingcompanies %}
+        {% if request.user.id == publishingcompany.user_id %}
+            <li>
+                <a href="{% url 'songwrytrapp:publishingcompany' publishingcompany.id %}">
+                {{ publishingcompany.name }}
+                </a>
+            </li>
+        {% endif %}
+    {% endfor %}
+    </ol>
+{% endblock %}
