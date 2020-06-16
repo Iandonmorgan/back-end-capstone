@@ -1,27 +1,35 @@
 {% extends 'shared/base.html' %}
 
 {% block content %}
-    <h1>Writer</h1>
+    <h1>Compositions</h1>
 
 
-    {% if writer.id is not None %}
-        <form action="{% url 'songwrytrapp:writer' writer.id %}" method="post">
+    {% if composition.id is not None %}
+        <form action="{% url 'songwrytrapp:composition' composition.id %}" method="post">
           <input type="hidden" name="actual_method" value="PUT">
     {% else %}
-        <form action="{% url 'songwrytrapp:writers' %}" method="post">
+        <form action="{% url 'songwrytrapp:compositions' %}" method="post">
     {% endif %}
       {% csrf_token %}
       <fieldset>
-          <label for="first_name">First Name: </label>
-          <input id="first_name" type="text" name="first_name" value="{{writer.first_name}}">
+          <label for="title">Title: </label>
+          <input id="title" type="text" name="title" value="{{composition.title}}">
       </fieldset>
       <fieldset>
-          <label for="last_name">Last Name: </label>
-          <input id="last_name" type="text" name="last_name" value="{{writer.last_name}}">
+          <label for="alt_titles">Alternate Titles: </label>
+          <input id="alt_titles" type="text" name="alt_titles" value="{{composition.alt_titles}}">
       </fieldset>
       <fieldset>
-          <label for="publishing_notes">Publishing Notes: </label>
-          <textarea id="publishing_notes" type="text" name="publishing_notes" rows="5" cols="30">{{writer.publishing_notes}}</textarea>
+          <label for="date_created">Date Created: </label>
+          <input id="date_created" type="date" name="date_created" value="{{composition.date_created}}">
+      </fieldset>
+      <fieldset>
+          <label for="notes">Notes: </label>
+          <textarea id="notes" type="text" name="notes" rows="5" cols="30">{{composition.notes}}</textarea>
+      </fieldset>
+      <fieldset>
+          <label for="lyrics">Lyrics: </label>
+          <textarea id="lyrics" type="text" name="lyrics" rows="20" cols="50">{{composition.lyrics}}</textarea>
       </fieldset>
       <input type="submit" value="Submit" />
     </form>

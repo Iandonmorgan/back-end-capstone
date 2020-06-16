@@ -1,21 +1,24 @@
 {% extends 'shared/base.html' %}
 
 {% block content %}
-  {% if request.user.id == publishingcompany.user_id %}
-    <h1>{{ publishingcompany.first_name }} {{ publishingcompany.last_name }}</h1>
-    <div>Publishing Notes: {{ publishingcompany.publishing_notes }}</div>
+  {% if request.user.id == composition.user_id %}
+    <h1>{{ composition.title }}</h1>
+    <div>Alternate Titles: {{ composition.alt_titles }}</div>
+    <div>Date Created: {{ composition.date_created }}</div>
+    <div>Notes: {{ composition.notes }}</div>
+    <div>Lyrics: {{ composition.lyrics }}</div>
     <div className="details-buttons">
-      <form action="{% url 'songwrytrapp:publishingcompany' publishingcompany.id %}" method="POST">
+      <form action="{% url 'songwrytrapp:composition' composition.id %}" method="POST">
         {% csrf_token %}
         <input type="hidden" name="actual_method" value="DELETE">
         <button>Delete</button>
       </form>
-      <form action="{% url 'songwrytrapp:publishingcompany_edit_form' publishingcompany.id %}" method="GET"> 
+      <form action="{% url 'songwrytrapp:composition_edit_form' composition.id %}" method="GET"> 
           {% csrf_token %}
           <button>Edit</button>
       </form>
     </div>
   {% else %}
-    <h1>No user exists with specified ID</h1>
+    <h1>No composition exists with specified ID</h1>
   {% endif %}
 {% endblock %}

@@ -15,4 +15,8 @@ urlpatterns = [
     path('publishingcompany/form', publishingcompany_form, name='publishingcompany_form'),
     path('publishingcompanies/<int:publishingcompany_id>/form/', publishingcompany_edit_form, name='publishingcompany_edit_form'),
     path('publishingcompanies/<int:publishingcompany_id>/', publishingcompany_details, name='publishingcompany'),
+    path('compositions/', composition_list, name='compositions'),
+    path('composition/form', composition_form, name='composition_form'),
+    path('compositions/<int:composition_id>/form/', composition_edit_form, name='composition_edit_form'),
+    path('compositions/<int:composition_id>/', composition_details, name='composition'),
 ]
