@@ -11,16 +11,18 @@
       {% csrf_token %}
       <fieldset>
           <label for="writer">Writer: </label>
-          <select id="writer" type="text" name="writer">
+          <select id="writer" type="text" name="writer" required>
             <option value="" selected>Select Writer</option>
             {% for writer in all_writers %}
-                <option value="{{ writer.id }}">{{ writer.first_name }} {{ writer.last_name }}
+                {% if request.user.id == writer.user_id %}
+                    <option value="{{ writer.id }}">{{ writer.first_name }} {{ writer.last_name }}</option>
+                {% endif %}
             {% endfor %}
           </select>
       </fieldset>
       <fieldset>
           <label for="percentage">Percentage: </label>
-          <input id="percentage" type="number" name="percentage" min="0" max="100">
+          <input id="percentage" type="number" name="percentage" min="0" max="100" required>
       </fieldset>
       <input type="submit" value="Submit" />
     </form>

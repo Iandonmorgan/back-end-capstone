@@ -35,6 +35,20 @@
     padding: 0 10px;
 }
 
+.compositionPublishing {
+    display: flex;
+    flex-flow: row wrap;
+    align-content: space-between;
+}
+
+.cpcli {
+    margin: 5px 0;
+}
+
+.cpcli_object {
+    padding: 0 10px;
+}
+
 /* collapsible div code from https://alligator.io/css/collapsible/ */
 
 
