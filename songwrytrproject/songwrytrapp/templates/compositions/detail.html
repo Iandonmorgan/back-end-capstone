@@ -8,14 +8,38 @@
 {% block content %}
   {% if request.user.id == composition.user_id %}
     <h1>{{ composition.title }}</h1>
-    {% if composition.alt_titles %}
-      <div>Alternate Titles: {{ composition.alt_titles }}</div>
+    {% if composition.alt_titles or composition.date_created or composition.notes %}
+      <div class="wrap-collabsible">
+        <input id="collapsible1" class="toggle" type="checkbox">
+        <label for="collapsible1" class="lbl-toggle">Composition Details</label>
+        <div class="collapsible-content">
+          <div class="content-inner">
+            {% if composition.alt_titles %}
+              <div>Alternate Titles: {{ composition.alt_titles }}</div>
+            {% endif %}
+            {% if composition.date_created %}
+              <div>Date Created: {{ composition.date_refactored }}</div>
+            {% endif %}
+            {% if composition.notes %}
+              <div>Notes: {{ composition.notes|linebreaksbr }}</div>
+            {% endif %}
+        </div>
+      </div>
+    </div>
     {% endif %}
-    <div>Date Created: {{ composition.date_created }}</div>
-    <div>Notes: {{ composition.notes|linebreaksbr }}</div>
-    <div>Lyrics:<div class="indent">{{ composition.lyrics|linebreaks }}</div></div>
+    {% if composition.lyrics %}
+      <div class="wrap-collabsible">
+        <input id="collapsible2" class="toggle" type="checkbox">
+        <label for="collapsible2" class="lbl-toggle">Lyrics</label>
+        <div class="collapsible-content">
+          <div class="content-inner">
+            <div class="indent">{{ composition.lyrics|linebreaks }}</div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
     <div class="details-buttons">
-      <form action="{% url 'songwrytrapp:composition' composition.id %}" method="POST">
+      <form action="{% url 'songwrytrapp:composition' composition.id %}" method="POST" onsubmit="return ConfirmDelete()">
         {% csrf_token %}
         <input type="hidden" name="actual_method" value="DELETE">
         <button>Delete</button>
@@ -28,4 +52,8 @@
   {% else %}
     <h1>No composition exists with specified ID</h1>
   {% endif %}
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'scripts/delete.js' %}"></script>
 {% endblock %}

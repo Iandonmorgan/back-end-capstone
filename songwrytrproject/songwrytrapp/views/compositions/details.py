@@ -18,7 +18,8 @@ def get_composition(composition_id):
             c.alt_titles,
             c.lyrics,
             c.notes,
-            STRFTIME('%m/%d/%Y',c.date_created) as date_created,
+            c.date_created,
+            STRFTIME('%m/%d/%Y',c.date_created) as date_refactored,
             c.user_id
         FROM songwrytrapp_composition c
         WHERE c.id = ?

@@ -12,7 +12,7 @@
     <div>PRO IPI: {{ writer.pro_ipi }}</div>
     <div>Notes: {{ writer.publishing_notes|linebreaks }}</div>
     <div class="details-buttons">
-      <form action="{% url 'songwrytrapp:writer' writer.id %}" method="POST">
+      <form action="{% url 'songwrytrapp:writer' writer.id %}" method="POST" onsubmit="return ConfirmDelete()">
         {% csrf_token %}
         <input type="hidden" name="actual_method" value="DELETE">
         <button>Delete</button>
@@ -25,4 +25,8 @@
   {% else %}
     <h1>No user exists with specified ID</h1>
   {% endif %}
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'scripts/delete.js' %}"></script>
 {% endblock %}

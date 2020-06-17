@@ -28,6 +28,8 @@
                         ({{ pro.city }} (Midtown), {{ pro.state }})</option>
                     {% elif pro.zipcode == "10005" %}
                         ({{ pro.city }} (Downtown), {{ pro.state }})</option>
+                    {% elif pro.zipcode == "n/a" %}
+                        </option>
                     {% else %}
                         ({{ pro.city }}, {{ pro.state }})</option>
                     {% endif %}
