@@ -27,14 +27,39 @@ def get_composition(composition_id):
 
         return db_cursor.fetchone()
 
+def get_composition_writers(composition_id):
+    with sqlite3.connect(Connection.db_path) as conn:
+        conn.row_factory = model_factory(Composition)
+        db_cursor = conn.cursor()
+
+        db_cursor.execute("""
+        SELECT
+            w.id,
+            w.first_name,
+            w.last_name,
+            w.user_id,
+            cw.percentage
+        FROM songwrytrapp_composition c
+        JOIN songwrytrapp_compositionwriter cw
+        ON cw.composition_id = c.id
+        JOIN songwrytrapp_writer w
+        ON w.id = cw.writer_id
+        WHERE c.id = ?
+        ORDER BY w.last_name
+        """, (composition_id,))
+
+        return db_cursor.fetchall()
+
 @login_required
 def composition_details(request, composition_id):
     if request.method == 'GET':
         composition = get_composition(composition_id)
+        composition_writers = get_composition_writers(composition_id)
 
         template = 'compositions/detail.html'
         context = {
-            'composition': composition
+            'composition': composition,
+            'composition_writers': composition_writers
         }
 
         return render(request, template, context)

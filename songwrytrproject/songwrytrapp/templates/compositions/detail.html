@@ -38,6 +38,23 @@
         </div>
       </div>
     {% endif %}
+    <div class="wrap-collabsible">
+        <input id="collapsible3" class="toggle" type="checkbox">
+        <label for="collapsible3" class="lbl-toggle">Writers</label>
+        <div class="collapsible-content">
+          <div class="content-inner">
+            <ul style="list-style: none;">
+              {% for writer in composition_writers %}
+                  {% if request.user.id == writer.user_id %}
+                      <li>
+                          <a href="{% url 'songwrytrapp:writer' writer.id %}">{{ writer.first_name }} {{ writer.last_name }}</a> {{ writer.percentage }}%
+                      </li>
+                  {% endif %}
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
     <div class="details-buttons">
       <form action="{% url 'songwrytrapp:composition' composition.id %}" method="POST" onsubmit="return ConfirmDelete()">
         {% csrf_token %}
