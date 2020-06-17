@@ -24,7 +24,15 @@
 .compositionWriter {
     display: flex;
     flex-flow: row wrap;
-    align-items: center;
+    align-content: space-between;
+}
+
+.cwli {
+    margin: 5px 0;
+}
+
+.cwli_object {
+    padding: 0 10px;
 }
 
 /* collapsible div code from https://alligator.io/css/collapsible/ */

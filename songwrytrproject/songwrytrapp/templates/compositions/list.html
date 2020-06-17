@@ -7,13 +7,13 @@
 
 {% block content %}
     <h1>Compositions</h1>
-        <a href="{% url 'songwrytrapp:composition_form' %}">Add Composition</a>
-    <ol>
+        <a href="{% url 'songwrytrapp:composition_form' %}"><button class="plusminus_button"><img src="{% static "img/plus.png" %}" alt="Remove Writer" height="16px" style="vertical-align:middle"> ADD COMPOSITION</button></a>
+    <ul style="list-style: none;">
     {% for composition in all_compositions %}
         {% if request.user.id == composition.user_id %}
             <li>
                 <a href="{% url 'songwrytrapp:composition' composition.id %}">
-                {{ composition.title }}
+                "{{ composition.title }}"
                 </a>
             </li>
         {% endif %}

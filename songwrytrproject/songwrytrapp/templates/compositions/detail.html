@@ -7,7 +7,7 @@
 
 {% block content %}
   {% if request.user.id == composition.user_id %}
-    <h1>{{ composition.title }}</h1>
+    <h1>"{{ composition.title }}"</h1>
     {% if composition.alt_titles or composition.date_created or composition.notes %}
       <div class="wrap-collabsible">
         <input id="collapsible1" class="toggle" type="checkbox">
@@ -40,23 +40,23 @@
     {% endif %}
     <div class="wrap-collabsible">
         <input id="collapsible3" class="toggle" type="checkbox">
-        <label for="collapsible3" class="lbl-toggle">Writers</label>
+        <label for="collapsible3" class="lbl-toggle">Writer Share</label>
         <div class="collapsible-content">
           <div class="content-inner">
             <ul style="list-style: none;">
               {% for writer in composition_writers %}
                   {% if request.user.id == writer.user_id %}
-                      <li>
+                      <li class="cwli">
                           <form class="compositionWriter" action="{% url 'songwrytrapp:composition_writer_form' writer.compositionwriter_id %}" method="POST">
-                          <a href="{% url 'songwrytrapp:writer' writer.id %}">{{ writer.first_name }} {{ writer.last_name }}</a> {{ writer.percentage }}%
+                          <a href="{% url 'songwrytrapp:writer' writer.id %}">{{ writer.first_name }} {{ writer.last_name }}</a><div class="cwli_object">{{ writer.percentage }}%</div>
                             {% csrf_token %}
                             <input type="hidden" name="actual_method" value="DELETE">
-                            <button>Remove</button>
+                            <button class="plusminus_button"><img src="{% static "img/minus.png" %}" alt="Remove Writer" height="16px"></button>
                           </form>
                       </li>
                   {% endif %}
               {% endfor %}
-              <li><a href="{% url 'songwrytrapp:composition_writer_form' composition.id %}">Attach Writer</li>
+              <li class="cwli"><a href="{% url 'songwrytrapp:composition_writer_form' composition.id %}"><button class="plusminus_button"><img src="{% static "img/plus.png" %}" alt="Attach Writer" height="16px" style="vertical-align:middle"> ATTACH WRITER</button></a></li>
             </ul>
           </div>
         </div>
