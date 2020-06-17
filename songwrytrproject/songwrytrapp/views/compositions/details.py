@@ -38,7 +38,8 @@ def get_composition_writers(composition_id):
             w.first_name,
             w.last_name,
             w.user_id,
-            cw.percentage
+            cw.percentage,
+            cw.id as compositionwriter_id
         FROM songwrytrapp_composition c
         JOIN songwrytrapp_compositionwriter cw
         ON cw.composition_id = c.id
@@ -63,7 +64,7 @@ def composition_details(request, composition_id):
         }
 
         return render(request, template, context)
-    if request.method == 'POST':
+    elif request.method == 'POST':
         form_data = request.POST
 
         # Check if this POST is for deleting a composition
@@ -81,7 +82,7 @@ def composition_details(request, composition_id):
 
             return redirect(reverse('songwrytrapp:compositions'))
         # Check if this POST is for editing a composition
-        if (
+        elif (
             "actual_method" in form_data
             and form_data["actual_method"] == "PUT"
         ):

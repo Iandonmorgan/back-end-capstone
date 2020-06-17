@@ -1,0 +1,27 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'styles/compositions.css' %}" />
+{% endblock %}
+
+{% block content %}
+    <h1>Attach writer for "{{ composition.title }}"</h1>
+    <form action="{% url 'songwrytrapp:composition_writer_form' composition.id %}" method="post">
+      {% csrf_token %}
+      <fieldset>
+          <label for="writer">Writer: </label>
+          <select id="writer" type="text" name="writer">
+            <option value="" selected>Select Writer</option>
+            {% for writer in all_writers %}
+                <option value="{{ writer.id }}">{{ writer.first_name }} {{ writer.last_name }}
+            {% endfor %}
+          </select>
+      </fieldset>
+      <fieldset>
+          <label for="percentage">Percentage: </label>
+          <input id="percentage" type="number" name="percentage" min="0" max="100">
+      </fieldset>
+      <input type="submit" value="Submit" />
+    </form>
+{% endblock %}

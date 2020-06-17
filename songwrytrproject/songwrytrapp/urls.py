@@ -19,4 +19,5 @@ urlpatterns = [
     path('composition/form', composition_form, name='composition_form'),
     path('compositions/<int:composition_id>/form/', composition_edit_form, name='composition_edit_form'),
     path('compositions/<int:composition_id>/', composition_details, name='composition'),
+    path('compositions/<int:composition_id>/attachwriter/', composition_writer_form, name='composition_writer_form'),
 ]
