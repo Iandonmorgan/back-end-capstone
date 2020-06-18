@@ -1,9 +1,7 @@
 {% extends 'shared/base.html' %}
 {% load static %}
 
-{% block css %}
-    <link rel="stylesheet" href="{% static 'styles/compositions.css' %}" />
-{% endblock %}
+{% comment %} DO NOT IMPORT COMPOSITIONS.CSS AS THE CHECKBOXES WILL DISAPPEAR {% endcomment %}
 
 {% block content %}
     {% if recording.id is not None %}
@@ -25,11 +23,11 @@
         </fieldset>
         <fieldset>
             <label for="producer">Producer: </label>
-            <input id="producer" type="text" name="producer" value="{{recording.producer}}">
+            <input id="producer" type="text" name="producer" value="{{recording.producer}}" required>
         </fieldset>
         <fieldset>
             <label for="artist">Artist: </label>
-            <input id="artist" type="text" name="artist" value="{{recording.artist}}">
+            <input id="artist" type="text" name="artist" value="{{recording.artist}}" required>
         </fieldset>
         <fieldset>
             <label for="ownership_split">Ownership Split: </label>
@@ -41,20 +39,17 @@
         </fieldset>
         <fieldset>
             <label for="date_recorded">Date Recorded: </label>
-            <input id="date_recorded" type="date" name="date_recorded" value="{{recording.date_recorded}}">
-      </fieldset>
+            <input id="date_recorded" type="date" name="date_recorded" value="{{recording.date_recorded}}" required>
+        </fieldset>
         <fieldset>
-            <label for="is_mixed"> Mixed</label>
-            <input id="is_mixed" type="checkbox" name="is_mixed" value="{{recording.is_mixed}}">
-      </fieldset>
+            <input id="is_mixed" type="checkbox" name="is_mixed" {% if recording.is_mixed %} checked {% endif %}/><label for="is_mixed"> Mixed</label>
+        </fieldset>
         <fieldset>
-            <label for="is_mastered"> Mastered</label>
-            <input id="is_mastered" type="checkbox" name="is_mastered" value="{{recording.is_mastered}}">
-      </fieldset>
+            <input id="is_mastered" type="checkbox" name="is_mastered" {% if recording.is_mastered %} checked {% endif %}/><label for="is_mastered"> Mastered</label>
+        </fieldset>
         <fieldset>
-            <label for="is_delivered"> Delivered</label>
-            <input id="is_delivered" type="checkbox" name="is_delivered" value="{{recording.is_delivered}}">
-      </fieldset>
+            <input id="is_delivered" type="checkbox" name="is_delivered" {% if recording.is_delivered %} checked {% endif %}/><label for="is_delivered"> Delivered</label>
+        </fieldset>
         <input type="submit" value="Submit" />
         </form>
 {% endblock %}

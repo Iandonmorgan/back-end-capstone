@@ -21,6 +21,6 @@ urlpatterns = [
     path('compositions/<int:composition_id>/', composition_details, name='composition'),
     path('compositions/<int:composition_id>/attachwriter/', composition_writer_form, name='composition_writer_form'),
     path('compositions/<int:composition_id>/attachpublisher/', composition_publishing_form, name='composition_publishing_form'),
-    # path('compositions/<int:composition_id>/recording/form/', composition_recording_form, name='composition_recording_form'),
+    path('compositions/<int:composition_id>/recording/', composition_recording_form, name='composition_recording_form'),
     # path('compositions/<int:composition_id>/recordings/<int:recording_id>/form/', composition_recording_edit_form, name='composition_recording_edit_form'),
 ]
