@@ -41,6 +41,16 @@
     align-content: space-between;
 }
 
+.details-buttons {
+    display: flex;
+    flex-flow: row wrap;
+    align-content: space-between;
+}
+
+.detail-button {
+    margin: -20px 20px 40px 0px;
+}
+
 .cpcli {
     margin: 5px 0;
 }

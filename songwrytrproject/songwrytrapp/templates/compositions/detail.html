@@ -8,6 +8,21 @@
 {% block content %}
   {% if request.user.id == composition.user_id %}
     <h1>"{{ composition.title }}"</h1>
+    <div class="details-buttons">
+      <div class="detail-button">
+        <form action="{% url 'songwrytrapp:composition' composition.id %}" method="POST" onsubmit="return ConfirmDelete()">
+          {% csrf_token %}
+          <input type="hidden" name="actual_method" value="DELETE">
+          <button>Delete</button>
+        </form>
+      </div>
+      <div class="detail-button">
+        <form action="{% url 'songwrytrapp:composition_edit_form' composition.id %}" method="GET"> 
+            {% csrf_token %}
+            <button>Edit</button>
+        </form>
+      </div>
+    </div>
     {% if composition.alt_titles or composition.date_created or composition.notes %}
       <div class="wrap-collabsible">
         <input id="collapsible1" class="toggle" type="checkbox">
@@ -83,17 +98,6 @@
           </ul>
         </div>
       </div>
-    </div>
-    <div class="details-buttons">
-      <form action="{% url 'songwrytrapp:composition' composition.id %}" method="POST" onsubmit="return ConfirmDelete()">
-        {% csrf_token %}
-        <input type="hidden" name="actual_method" value="DELETE">
-        <button>Delete</button>
-      </form>
-      <form action="{% url 'songwrytrapp:composition_edit_form' composition.id %}" method="GET"> 
-          {% csrf_token %}
-          <button>Edit</button>
-      </form>
     </div>
   {% else %}
     <h1>No composition exists with specified ID</h1>
