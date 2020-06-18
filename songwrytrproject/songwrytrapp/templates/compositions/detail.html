@@ -99,6 +99,29 @@
         </div>
       </div>
     </div>
+    <div class="wrap-collabsible">
+      <input id="collapsible5" class="toggle" type="checkbox">
+      <label for="collapsible5" class="lbl-toggle">Recording(s)</label>
+      <div class="collapsible-content">
+        <div class="content-inner">
+          <ul style="list-style: none;">
+            {% for recording in composition_recordings %}
+                {% if request.user.id == recording.user_id %}
+                    <li class="recli">
+                        <form class="compositionRecording" action="{% url 'songwrytrapp:composition_recording_form' recording.id %}" method="POST">
+                        <a href="{% url 'songwrytrapp:composition_recording_edit_form' composition.id recording.id %}">{% if (recording.recording_type) %}{{ recording.recording_type }}{% else %}{{ composition.title }}{% endif %}</a><div class="recli_object"> Producer: {{ recording.producer }}</div> Artist: {{ recording.artist }} Date Recorded: {{ recording.date_recorded }}
+                          {% csrf_token %}
+                          <input type="hidden" name="actual_method" value="DELETE">
+                          <button class="plusminus_button"><img src="{% static "img/minus.png" %}" alt="Delete Recording" height="16px"> DELETE RECORDING </button>
+                        </form>
+                    </li>
+                {% endif %}
+            {% endfor %}
+            <li class="recli"><a href="{% url 'songwrytrapp:composition_recording_form' recording.id %}"><button class="plusminus_button"><img src="{% static "img/plus.png" %}" alt="Add Recording" height="16px" style="vertical-align:middle"> ATTACH PUBLISHING COMPANY</button></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
   {% else %}
     <h1>No composition exists with specified ID</h1>
   {% endif %}

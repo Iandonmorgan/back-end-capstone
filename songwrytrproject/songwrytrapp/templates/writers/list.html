@@ -7,7 +7,7 @@
 
 {% block content %}
     <h1>Writers</h1>
-        <a href="{% url 'songwrytrapp:writer_form' %}">Add Writer</a>
+        <a href="{% url 'songwrytrapp:writer_form' %}"><button class="plusminus_button"><img src="{% static "img/plus.png" %}" alt="Add Writer" height="16px" style="vertical-align:middle"> ADD WRITER</button></a>
     <ol>
     {% for writer in all_writers %}
         {% if request.user.id == writer.user_id %}

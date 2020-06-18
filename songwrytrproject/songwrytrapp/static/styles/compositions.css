@@ -41,6 +41,12 @@
     align-content: space-between;
 }
 
+.compositionRecording {
+    display: flex;
+    flex-flow: row wrap;
+    align-content: space-between;
+}
+
 .details-buttons {
     display: flex;
     flex-flow: row wrap;
@@ -56,6 +62,14 @@
 }
 
 .cpcli_object {
+    padding: 0 10px;
+}
+
+.recli {
+    margin: 5px 0;
+}
+
+.recli_object {
     padding: 0 10px;
 }
 

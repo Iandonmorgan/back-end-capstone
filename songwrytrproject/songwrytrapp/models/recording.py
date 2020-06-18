@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
+from .composition import Composition
 
 class Recording(models.Model):
 
@@ -13,6 +14,9 @@ class Recording(models.Model):
     is_mixed = models.BooleanField()
     is_mastered = models.BooleanField()
     is_delivered = models.BooleanField()
+    composition = models.ForeignKey(Composition, on_delete=models.CASCADE)
+    image_url = models.CharField(max_length=255)
+    ownership_split = models.CharField(max_length=255)
 
     class Meta:
         verbose_name = ("recording")
