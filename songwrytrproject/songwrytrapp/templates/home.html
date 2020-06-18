@@ -2,6 +2,10 @@
 
 {% block content %}
 
-    <h1 align="center">Welcome to the SONGWRYTR Composition Management System</h1>
+    {% if request.user.id %}
+    <p align="center">Welcome, {{request.user.first_name}}! </p>
+    {% else %}
+    <p align="center">Welcome! Please <a href="{% url 'songwrytrapp:login' %}">login</a> for additional insights. </p>
+    {% endif %}
 
 {% endblock %}

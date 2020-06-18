@@ -1,4 +1,5 @@
 {% extends 'shared/base.html' %}
+{% load static %}
 
 {% block content %}
   {% if request.user.id == publishingcompany.user_id %}
@@ -6,8 +7,8 @@
     <div>PRO: {{ publishingcompany.pro.name }} ({{ publishingcompany.pro.city }}, {{ publishingcompany.pro.state }})</div>
     <div>PRO Account Number: {{ publishingcompany.pro_acct_num }}</div>
     <div>Administrator: {{ publishingcompany.admin }}</div>
-    <div className="details-buttons">
-      <form action="{% url 'songwrytrapp:publishingcompany' publishingcompany.id %}" method="POST">
+    <div class="details-buttons">
+      <form action="{% url 'songwrytrapp:publishingcompany' publishingcompany.id %}" method="POST" onsubmit="return ConfirmDelete()">
         {% csrf_token %}
         <input type="hidden" name="actual_method" value="DELETE">
         <button>Delete</button>
@@ -20,4 +21,8 @@
   {% else %}
     <h1>No user exists with specified ID</h1>
   {% endif %}
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'scripts/delete.js' %}"></script>
 {% endblock %}

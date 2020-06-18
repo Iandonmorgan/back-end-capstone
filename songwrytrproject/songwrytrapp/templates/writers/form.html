@@ -1,4 +1,9 @@
 {% extends 'shared/base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'styles/writers.css' %}" />
+{% endblock %}
 
 {% block content %}
     <h1>Writer</h1>
@@ -32,6 +37,8 @@
                         ({{ pro.city }} (Midtown), {{ pro.state }})</option>
                     {% elif pro.zipcode == "10005" %}
                         ({{ pro.city }} (Downtown), {{ pro.state }})</option>
+                    {% elif pro.zipcode == "n/a" %}
+                        </option>
                     {% else %}
                         ({{ pro.city }}, {{ pro.state }})</option>
                     {% endif %}

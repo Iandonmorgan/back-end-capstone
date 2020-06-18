@@ -1,0 +1,33 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'styles/compositions.css' %}" />
+{% endblock %}
+
+{% block content %}
+    <h1>Attach publishing company for "{{ composition.title }}"</h1>
+    <form action="{% url 'songwrytrapp:composition_publishing_form' composition.id %}" method="post">
+      {% csrf_token %}
+      <fieldset>
+          <label for="publishingcompany">Publishing Company: </label>
+          <select id="publishingcompany" type="text" name="publishingcompany" required>
+            <option value="" selected>Select Publishing Company</option>
+            {% for publishingcompany in all_publishers %}
+                {% if request.user.id == publishingcompany.user_id %}
+                    <option value="{{ publishingcompany.id }}">{{ publishingcompany.name }}</option>
+                {% endif %}
+            {% endfor %}
+          </select>
+      </fieldset>
+      <fieldset>
+          <label for="percentage">Percentage: </label>
+          <input id="percentage" type="number" name="percentage" min="0" max="100" required>
+      </fieldset>
+      <fieldset>
+          <label for="pro_work_num">PRO Work ID: </label>
+          <input id="pro_work_num" type="text" name="pro_work_num">
+      </fieldset>
+      <input type="submit" value="Submit" />
+    </form>
+{% endblock %}
