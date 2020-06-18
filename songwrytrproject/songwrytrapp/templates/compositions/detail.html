@@ -108,7 +108,7 @@
             {% for recording in composition_recordings %}
                 {% if request.user.id == recording.user_id %}
                     <li class="recli">
-                        <form class="compositionRecording" action="{% url 'songwrytrapp:composition_recording_form' recording.id %}" method="POST">
+                        <form class="compositionRecording" action="{% url 'songwrytrapp:composition_recording_form' recording.id %}" method="POST" onsubmit="return ConfirmDeleteRecording()">
                         {% if recording.recording_type %}{{ recording.recording_type }}{% else %}"{{ composition.title }}"{% endif %}<div class="recli_object"> Producer: {{ recording.producer }}</div> Artist: {{ recording.artist }} Date Recorded: {{ recording.date_recorded }}
                           {% csrf_token %}
                           <input type="hidden" name="actual_method" value="DELETE">

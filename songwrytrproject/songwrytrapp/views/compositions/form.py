@@ -235,4 +235,4 @@ def composition_recording_form(request, composition_id):
                     is_mixed, is_mastered, is_delivered,
                     form_data['ownership_split'], request.user.id, composition_id))
 
-            return redirect(reverse('songwrytrapp:compositions'))
+            return redirect(reverse('songwrytrapp:composition', args=[composition_id]))
