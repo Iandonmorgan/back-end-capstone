@@ -108,12 +108,37 @@
             {% for recording in composition_recordings %}
                 {% if request.user.id == recording.user_id %}
                     <li class="recli">
-                        <form class="compositionRecording" action="{% url 'songwrytrapp:composition_recording_form' recording.id %}" method="POST" onsubmit="return ConfirmDeleteRecording()">
-                        {% if recording.recording_type %}{{ recording.recording_type }}{% else %}"{{ composition.title }}"{% endif %}<div class="recli_object"> Producer: {{ recording.producer }}</div> Artist: {{ recording.artist }} Date Recorded: {{ recording.date_recorded }}
-                          {% csrf_token %}
-                          <input type="hidden" name="actual_method" value="DELETE">
-                          <button class="plusminus_button"><img src="{% static "img/minus.png" %}" alt="Delete Recording" height="16px"> DELETE RECORDING </button>
-                        </form>
+                      "{{ composition.title }}"
+                      <div class="recording">
+                        <div class="recording_columns">
+                          <div class="left_column">
+                            <div>
+                              <img src="{{ recording.image_url }}" class="recording_image">
+                            </div>
+                          </div>
+                          <div class="right_column">
+                          {% if recording.recording_type %}
+                            <div>
+                            Type: {{ recording.recording_type }}
+                            </div>
+                          {% endif %}
+                            <div>Producer: {{ recording.producer }}</div>
+                            <div>Artist: {{ recording.artist }}</div>
+                            <div>Date Recorded: {{ recording.date_refactored }}</div>
+                          </div>
+                        </div>
+                        <div>
+                          <audio controls id="player" controlsList="nodownload">
+                            <source src="{{ recording.audio_url }}">
+                            Your browser does not support the audio element.
+                          </audio>
+                        </div>
+                      </div>
+                      <form class="compositionRecording" action="{% url 'songwrytrapp:composition_recording_form' recording.id %}" method="POST" onsubmit="return ConfirmDeleteRecording()">
+                        {% csrf_token %}
+                        <input type="hidden" name="actual_method" value="DELETE">
+                        <button class="plusminus_button"><img src="{% static "img/minus.png" %}" alt="Delete Recording" height="16px"> DELETE RECORDING </button>
+                      </form>
                     </li>
                 {% endif %}
             {% endfor %}

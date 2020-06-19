@@ -83,7 +83,8 @@ def get_composition_recordings(composition_id):
 
         db_cursor.execute("""
         SELECT
-            r.*
+            r.*,
+            STRFTIME('%m/%d/%Y',r.date_recorded) as date_refactored
         FROM songwrytrapp_composition c
         JOIN songwrytrapp_recording r
         ON r.composition_id = c.id

@@ -1,3 +1,26 @@
+#player {
+    width: 100%;
+}
+
+.recording_image {
+    width: 300px;
+}
+
+.recording_columns {
+    display: flex;
+    align-items: flex-end;
+}
+
+.recording {
+    display: flex;
+    flex-direction: column;
+}
+
+.right_column {
+    font-size: 1em;
+    margin: 0 0 5px 5px;
+}
+
 .compositions {
     list-style: none;
     display: flex;
