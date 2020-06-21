@@ -7,7 +7,7 @@
 
 {% block content %}
     <h1>Publishing Companies</h1>
-        <a href="{% url 'songwrytrapp:publishingcompany_form' %}">Add Publishing Company</a>
+        <a href="{% url 'songwrytrapp:publishingcompany_form' %}"><button class="plusminus_button"><img src="{% static "img/plus.png" %}" alt="Add Publishing Company" height="16px" style="vertical-align:middle"> ADD PUBLISHING COMPANY</button></a>
     <ol>
     {% for publishingcompany in all_publishingcompanies %}
         {% if request.user.id == publishingcompany.user_id %}

@@ -1,0 +1,55 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+
+{% comment %} DO NOT IMPORT COMPOSITIONS.CSS AS THE CHECKBOXES WILL DISAPPEAR {% endcomment %}
+
+{% block content %}
+    {% if recording.id is not None %}
+        <h1>Update recording for "{{ composition.title }}"</h1>
+        <form action="{% url 'songwrytrapp:composition_recording_edit_form' composition.id recording.id %}" method="post">
+        <input type="hidden" name="actual_method" value="PUT">
+    {% else %}
+        <h1>Add recording for "{{ composition.title }}"</h1>
+        <form action="{% url 'songwrytrapp:composition_recording_form' composition.id %}" method="post">
+    {% endif %}
+        {% csrf_token %}
+        <fieldset>
+            <label for="audio_url">Audio URL: </label>
+            <input id="audio_url" type="text" name="audio_url" value="{{recording.audio_url}}">
+        </fieldset>
+        <fieldset>
+            <label for="image_url">Image URL: </label>
+            <input id="image_url" type="text" name="image_url" value="{{recording.image_url}}">
+        </fieldset>
+        <fieldset>
+            <label for="producer">Producer: </label>
+            <input id="producer" type="text" name="producer" value="{{recording.producer}}" required>
+        </fieldset>
+        <fieldset>
+            <label for="artist">Artist: </label>
+            <input id="artist" type="text" name="artist" value="{{recording.artist}}" required>
+        </fieldset>
+        <fieldset>
+            <label for="ownership_split">Ownership Split: </label>
+            <input id="ownership_split" type="text" name="ownership_split" value="{{recording.ownership_split}}">
+        </fieldset>
+        <fieldset>
+            <label for="recording_type">Recording Type: </label>
+            <input id="recording_type" type="text" name="recording_type" value="{{recording.recording_type}}">
+        </fieldset>
+        <fieldset>
+            <label for="date_recorded">Date Recorded: </label>
+            <input id="date_recorded" type="date" name="date_recorded" value="{{recording.date_recorded}}" required>
+        </fieldset>
+        <fieldset>
+            <input id="is_mixed" type="checkbox" name="is_mixed" {% if recording.is_mixed == "on"%} checked {% endif %}/><label for="is_mixed"> Mixed</label>
+        </fieldset>
+        <fieldset>
+            <input id="is_mastered" type="checkbox" name="is_mastered" {% if recording.is_mastered == "on" %} checked {% endif %}/><label for="is_mastered"> Mastered</label>
+        </fieldset>
+        <fieldset>
+            <input id="is_delivered" type="checkbox" name="is_delivered" {% if recording.is_delivered == "on" %} checked {% endif %}/><label for="is_delivered"> Delivered</label>
+        </fieldset>
+        <input type="submit" value="Submit" />
+        </form>
+{% endblock %}

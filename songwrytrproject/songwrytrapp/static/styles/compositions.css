@@ -1,3 +1,26 @@
+#player {
+    width: 100%;
+}
+
+.recording_image {
+    width: 300px;
+}
+
+.recording_columns {
+    display: flex;
+    align-items: flex-end;
+}
+
+.recording {
+    display: flex;
+    flex-direction: column;
+}
+
+.right_column {
+    font-size: 1em;
+    margin: 0 0 5px 5px;
+}
+
 .compositions {
     list-style: none;
     display: flex;
@@ -41,6 +64,12 @@
     align-content: space-between;
 }
 
+.compositionRecording {
+    display: flex;
+    flex-flow: row wrap;
+    align-content: space-between;
+}
+
 .details-buttons {
     display: flex;
     flex-flow: row wrap;
@@ -56,6 +85,14 @@
 }
 
 .cpcli_object {
+    padding: 0 10px;
+}
+
+.recli {
+    margin: 5px 0;
+}
+
+.recli_object {
     padding: 0 10px;
 }
 

@@ -99,6 +99,55 @@
         </div>
       </div>
     </div>
+    <div class="wrap-collabsible">
+      <input id="collapsible5" class="toggle" type="checkbox">
+      <label for="collapsible5" class="lbl-toggle">Recordings</label>
+      <div class="collapsible-content">
+        <div class="content-inner">
+          <ul style="list-style: none;">
+            {% for recording in composition_recordings %}
+                {% if request.user.id == recording.user_id %}
+                    <li class="recli">
+                      "{{ composition.title }}"
+                      <div class="recording">
+                        <div class="recording_columns">
+                          <div class="left_column">
+                            <div>
+                              <img src="{{ recording.image_url }}" class="recording_image">
+                            </div>
+                          </div>
+                          <div class="right_column">
+                          {% if recording.recording_type %}
+                            <div>
+                            Type: {{ recording.recording_type }}
+                            </div>
+                          {% endif %}
+                            <div>Producer: {{ recording.producer }}</div>
+                            <div>Artist: {{ recording.artist }}</div>
+                            <div>Date Recorded: {{ recording.date_refactored }}</div>
+                          </div>
+                        </div>
+                        <div>
+                          <audio controls id="player" controlsList="nodownload">
+                            <source src="{{ recording.audio_url }}">
+                            Your browser does not support the audio element.
+                          </audio>
+                        </div>
+                      </div>
+                      <a href="{% url 'songwrytrapp:composition_recording_edit_form' composition.id  recording.id %}"><button class="edit_button"><img src="{% static "img/edit.png" %}" alt="Edit Recording" height="16px" style="vertical-align:middle"> EDIT RECORDING</button></a>
+                      <form class="compositionRecording" action="{% url 'songwrytrapp:composition_recording_delete' composition.id recording.id %}" method="POST" onsubmit="return ConfirmDeleteRecording()">
+                        {% csrf_token %}
+                        <input type="hidden" name="actual_method" value="DELETE">
+                        <button class="plusminus_button"><img src="{% static "img/minus.png" %}" alt="Delete Recording" height="16px"> DELETE RECORDING </button>
+                      </form>
+                    </li>
+                {% endif %}
+            {% endfor %}
+            <li class="recli"><a href="{% url 'songwrytrapp:composition_recording_form' composition.id %}"><button class="plusminus_button"><img src="{% static "img/plus.png" %}" alt="Add Recording" height="16px" style="vertical-align:middle"> ADD RECORDING</button></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
   {% else %}
     <h1>No composition exists with specified ID</h1>
   {% endif %}
