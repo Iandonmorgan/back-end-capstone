@@ -42,13 +42,13 @@
             <input id="date_recorded" type="date" name="date_recorded" value="{{recording.date_recorded}}" required>
         </fieldset>
         <fieldset>
-            <input id="is_mixed" type="checkbox" name="is_mixed" {% if recording.is_mixed %} checked {% endif %}/><label for="is_mixed"> Mixed</label>
+            <input id="is_mixed" type="checkbox" name="is_mixed" {% if recording.is_mixed == "on"%} checked {% endif %}/><label for="is_mixed"> Mixed</label>
         </fieldset>
         <fieldset>
-            <input id="is_mastered" type="checkbox" name="is_mastered" {% if recording.is_mastered %} checked {% endif %}/><label for="is_mastered"> Mastered</label>
+            <input id="is_mastered" type="checkbox" name="is_mastered" {% if recording.is_mastered == "on" %} checked {% endif %}/><label for="is_mastered"> Mastered</label>
         </fieldset>
         <fieldset>
-            <input id="is_delivered" type="checkbox" name="is_delivered" {% if recording.is_delivered %} checked {% endif %}/><label for="is_delivered"> Delivered</label>
+            <input id="is_delivered" type="checkbox" name="is_delivered" {% if recording.is_delivered == "on" %} checked {% endif %}/><label for="is_delivered"> Delivered</label>
         </fieldset>
         <input type="submit" value="Submit" />
         </form>
