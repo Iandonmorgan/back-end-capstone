@@ -179,6 +179,7 @@ def composition_publishing_form(request, composition_id):
 
             return redirect(reverse('songwrytrapp:compositions'))
 
+@login_required
 def composition_recording_form(request, composition_id):
 
     if request.method == 'GET':
@@ -189,11 +190,43 @@ def composition_recording_form(request, composition_id):
             'composition': composition,
             'composition_recordings': composition_recordings
         }
-
         return render(request, template, context)
     elif request.method == 'POST':
         form_data = request.POST
-        # Check if this POST is for deleting a recording
+        with sqlite3.connect(Connection.db_path) as conn:
+            db_cursor = conn.cursor()
+            try:
+                is_mixed = form_data["is_mixed"]
+            except MultiValueDictKeyError:
+                is_mixed = "off"
+            try:
+                is_mastered = form_data["is_mastered"]
+            except MultiValueDictKeyError:
+                is_mastered = "off"
+            try:
+                is_delivered = form_data["is_delivered"]
+            except MultiValueDictKeyError:
+                is_delivered = "off"
+            db_cursor.execute("""
+            INSERT INTO songwrytrapp_recording
+            (
+                audio_url, image_url, producer, artist, recording_type, date_recorded, is_mixed, is_mastered, is_delivered, ownership_split, user_id, composition_id
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """,
+            (form_data['audio_url'], form_data['image_url'],
+                form_data['producer'], form_data['artist'],
+                form_data['recording_type'], form_data['date_recorded'],
+                is_mixed, is_mastered, is_delivered,
+                form_data['ownership_split'], request.user.id, composition_id))
+
+        return redirect(reverse('songwrytrapp:composition', args=[composition_id]))
+
+@login_required
+def composition_recording_delete(request, composition_id, recording_id):
+
+    if request.method == 'POST':
+        form_data = request.POST
         if (
             "actual_method" in form_data
             and form_data["actual_method"] == "DELETE"
@@ -204,35 +237,6 @@ def composition_recording_form(request, composition_id):
                 db_cursor.execute("""
                 DELETE FROM songwrytrapp_recording
                 WHERE id = ?
-                """, (composition_id,))
-
-            return redirect(reverse('songwrytrapp:compositions'))
-        else:
-            with sqlite3.connect(Connection.db_path) as conn:
-                db_cursor = conn.cursor()
-                try:
-                    is_mixed = form_data["is_mixed"]
-                except MultiValueDictKeyError:
-                    is_mixed = "off"
-                try:
-                    is_mastered = form_data["is_mastered"]
-                except MultiValueDictKeyError:
-                    is_mastered = "off"
-                try:
-                    is_delivered = form_data["is_delivered"]
-                except MultiValueDictKeyError:
-                    is_delivered = "off"
-                db_cursor.execute("""
-                INSERT INTO songwrytrapp_recording
-                (
-                    audio_url, image_url, producer, artist, recording_type, date_recorded, is_mixed, is_mastered, is_delivered, ownership_split, user_id, composition_id
-                )
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-                """,
-                (form_data['audio_url'], form_data['image_url'],
-                    form_data['producer'], form_data['artist'],
-                    form_data['recording_type'], form_data['date_recorded'],
-                    is_mixed, is_mastered, is_delivered,
-                    form_data['ownership_split'], request.user.id, composition_id))
+                """, (recording_id,))
 
             return redirect(reverse('songwrytrapp:composition', args=[composition_id]))
