@@ -13,9 +13,14 @@ def get_publishingcompany(publishingcompany_id):
 
         db_cursor.execute("""
         SELECT
-            p.*
-        FROM songwrytrapp_publishingcompany p
-        WHERE p.id = ?
+            pc.id,
+            pc.user_id,
+            pc.name,
+            pc.pro_id,
+            pc.pro_acct_num,
+            pc.admin
+        FROM songwrytrapp_publishingcompany pc
+        WHERE pc.id = ?
         """, (publishingcompany_id,))
 
         return db_cursor.fetchone()

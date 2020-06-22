@@ -13,7 +13,13 @@ def get_writers():
 
         db_cursor.execute("""
         SELECT
-            w.*,
+            w.id,
+            w.user_id,
+            w.first_name,
+            w.last_name,
+            w.publishing_notes,
+            w.pro_id,
+            w.pro_ipi,
             p.name as 'PRO_Name',
             p.city as 'PRO_City',
             p.state as 'PRO_State',
@@ -32,7 +38,13 @@ def get_pros():
 
         db_cursor.execute("""
         SELECT
-            p.*
+            p.id,
+            p.name,
+            p.address,
+            p.city,
+            p.state,
+            p.zipcode,
+            p.website
         FROM songwrytrapp_pro p
         """)
 

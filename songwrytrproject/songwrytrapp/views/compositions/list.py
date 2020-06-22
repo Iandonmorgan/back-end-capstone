@@ -13,7 +13,13 @@ def composition_list(request):
             db_cursor = conn.cursor()
             db_cursor.execute("""
             SELECT
-                c.*
+                c.id,
+                c.user_id,
+                c.title,
+                c.alt_titles,
+                c.lyrics,
+                c.notes,
+                c.date_created
             FROM songwrytrapp_composition c
             ORDER BY c.title
             """)

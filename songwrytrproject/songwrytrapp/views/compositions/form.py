@@ -13,7 +13,13 @@ def get_compositions():
 
         db_cursor.execute("""
         SELECT
-            c.*
+            c.id,
+            c.user_id,
+            c.title,
+            c.alt_titles,
+            c.lyrics,
+            c.notes,
+            c.date_created
         FROM songwrytrapp_composition c
         """)
 
@@ -26,7 +32,13 @@ def get_writers():
 
         db_cursor.execute("""
         SELECT
-            w.*
+            w.id,
+            w.user_id,
+            w.first_name,
+            w.last_name,
+            w.publishing_notes,
+            w.pro_id,
+            w.pro_ipi
         FROM songwrytrapp_writer w
         ORDER BY w.last_name
         """)
@@ -40,7 +52,12 @@ def get_publishers():
 
         db_cursor.execute("""
         SELECT
-            pc.*
+            pc.id,
+            pc.user_id,
+            pc.name,
+            pc.pro_id,
+            pc.pro_acct_num,
+            pc.admin
         FROM songwrytrapp_publishingcompany pc
         ORDER BY pc.name
         """)
@@ -54,7 +71,19 @@ def get_recording(recording_id):
 
         db_cursor.execute("""
         SELECT
-            r.*
+            r.id,
+            r.user_id,
+            r.audio_url,
+            r.producer,
+            r.artist,
+            r.recording_type,
+            r.date_recorded,
+            r.is_mixed,
+            r.is_mastered,
+            r.is_delivered,
+            r.composition_id,
+            r.image_url,
+            r.ownership_split
         FROM songwrytrapp_recording r
         WHERE id = ?
         """, (recording_id,))
@@ -162,7 +191,7 @@ def composition_publishing_form(request, composition_id):
                 WHERE id = ?
                 """, (composition_id,))
 
-            return redirect(reverse('songwrytrapp:composition', args=[composition_id]))
+            return redirect(reverse('songwrytrapp:compositions'))
         else:
             with sqlite3.connect(Connection.db_path) as conn:
                 db_cursor = conn.cursor()
@@ -177,7 +206,7 @@ def composition_publishing_form(request, composition_id):
                 (form_data['publishingcompany'], form_data['percentage'],
                     form_data['pro_work_num'], composition_id))
 
-            return redirect(reverse('songwrytrapp:compositions'))
+            return redirect(reverse('songwrytrapp:composition', args=[composition_id]))
 
 @login_required
 def composition_recording_form(request, composition_id):
@@ -296,5 +325,43 @@ def composition_recording_delete(request, composition_id, recording_id):
                 DELETE FROM songwrytrapp_recording
                 WHERE id = ?
                 """, (recording_id,))
+
+            return redirect(reverse('songwrytrapp:composition', args=[composition_id]))
+
+@login_required
+def composition_publishing_remove(request, composition_id, compositionpublishing_id):
+
+    if request.method == 'POST':
+        form_data = request.POST
+        if (
+            "actual_method" in form_data
+            and form_data["actual_method"] == "DELETE"
+        ):
+            with sqlite3.connect(Connection.db_path) as conn:
+                db_cursor = conn.cursor()
+
+                db_cursor.execute("""
+                DELETE FROM songwrytrapp_compositionpublishing
+                WHERE id = ?
+                """, (compositionpublishing_id,))
+
+            return redirect(reverse('songwrytrapp:composition', args=[composition_id]))
+
+@login_required
+def composition_writer_remove(request, composition_id, compositionwriter_id):
+
+    if request.method == 'POST':
+        form_data = request.POST
+        if (
+            "actual_method" in form_data
+            and form_data["actual_method"] == "DELETE"
+        ):
+            with sqlite3.connect(Connection.db_path) as conn:
+                db_cursor = conn.cursor()
+
+                db_cursor.execute("""
+                DELETE FROM songwrytrapp_compositionwriter
+                WHERE id = ?
+                """, (compositionwriter_id,))
 
             return redirect(reverse('songwrytrapp:composition', args=[composition_id]))

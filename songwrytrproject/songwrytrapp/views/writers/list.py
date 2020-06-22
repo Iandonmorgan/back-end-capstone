@@ -14,7 +14,13 @@ def writer_list(request):
             db_cursor = conn.cursor()
             db_cursor.execute("""
             SELECT
-                w.*
+                w.id,
+                w.user_id,
+                w.first_name,
+                w.last_name,
+                w.publishing_notes,
+                w.pro_id,
+                w.pro_ipi
             FROM songwrytrapp_writer w
             ORDER BY w.last_name
             """)

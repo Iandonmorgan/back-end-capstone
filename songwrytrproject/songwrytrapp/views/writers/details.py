@@ -13,7 +13,13 @@ def get_writer(writer_id):
 
         db_cursor.execute("""
         SELECT
-            w.*
+            w.id,
+            w.user_id,
+            w.first_name,
+            w.last_name,
+            w.publishing_notes,
+            w.pro_id,
+            w.pro_ipi
         FROM songwrytrapp_writer w
         WHERE w.id = ?
         """, (writer_id,))

@@ -58,7 +58,12 @@ def get_composition_publishers(composition_id):
 
         db_cursor.execute("""
         SELECT
-            pc.*,
+            pc.id,
+            pc.user_id,
+            pc.name,
+            pc.pro_id,
+            pc.pro_acct_num,
+            pc.admin,
             cpc.percentage,
             cpc.pro_work_num,
             p.name as pro,
@@ -83,7 +88,19 @@ def get_composition_recordings(composition_id):
 
         db_cursor.execute("""
         SELECT
-            r.*,
+            r.id,
+            r.user_id,
+            r.audio_url,
+            r.producer,
+            r.artist,
+            r.recording_type,
+            r.date_recorded,
+            r.is_mixed,
+            r.is_mastered,
+            r.is_delivered,
+            r.composition_id,
+            r.image_url,
+            r.ownership_split,
             STRFTIME('%m/%d/%Y',r.date_recorded) as date_refactored
         FROM songwrytrapp_composition c
         JOIN songwrytrapp_recording r
