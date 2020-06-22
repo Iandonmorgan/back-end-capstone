@@ -72,4 +72,4 @@ def writer_details(request, writer_id):
                     writer_id,
                 ))
 
-            return redirect(reverse('songwrytrapp:writers'))
+            return redirect(reverse('songwrytrapp:writer', args=[writer_id]))

@@ -70,4 +70,4 @@ def publishingcompany_details(request, publishingcompany_id):
                     publishingcompany_id,
                 ))
 
-            return redirect(reverse('songwrytrapp:publishingcompanies'))
+            return redirect(reverse('songwrytrapp:publishingcompany', args=[publishingcompany_id]))

@@ -151,4 +151,4 @@ def composition_details(request, composition_id):
                     composition_id,
                 ))
 
-            return redirect(reverse('songwrytrapp:compositions'))
+            return redirect(reverse('songwrytrapp:composition', args=[composition_id]))

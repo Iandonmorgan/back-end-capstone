@@ -115,7 +115,7 @@ def composition_writer_form(request, composition_id):
                 WHERE id = ?
                 """, (composition_id,))
 
-            return redirect(reverse('songwrytrapp:compositions'))
+            return redirect(reverse('songwrytrapp:composition', args=[composition_id]))
         else:
             with sqlite3.connect(Connection.db_path) as conn:
                 db_cursor = conn.cursor()
@@ -130,7 +130,7 @@ def composition_writer_form(request, composition_id):
                 (form_data['writer'], form_data['percentage'],
                     composition_id))
 
-            return redirect(reverse('songwrytrapp:compositions'))
+            return redirect(reverse('songwrytrapp:composition', args=[composition_id]))
 
 @login_required
 def composition_publishing_form(request, composition_id):
@@ -162,7 +162,7 @@ def composition_publishing_form(request, composition_id):
                 WHERE id = ?
                 """, (composition_id,))
 
-            return redirect(reverse('songwrytrapp:compositions'))
+            return redirect(reverse('songwrytrapp:composition', args=[composition_id]))
         else:
             with sqlite3.connect(Connection.db_path) as conn:
                 db_cursor = conn.cursor()
