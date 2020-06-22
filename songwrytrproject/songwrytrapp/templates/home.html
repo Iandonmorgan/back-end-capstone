@@ -7,7 +7,7 @@
     <p align="center">Welcome, {{request.user.first_name}}! </p>
     {% else %}
     <div align="center">
-        <div class="navList__route"><a href="{% url 'songwrytrapp:home'%}"><img src="{% static "img/songwrytr_logo_sm.png" %}" alt="SONGWRYTR" height="50px"></a></div><br /><br />
+        <div class="navList__route"><a href="{% url 'songwrytrapp:home'%}"><img src="{% static "img/songwrytr_logo_sm.png" %}" alt="SONGWRYTR" height="77px"></a></div><br /><br />
         <div>Welcome!</div>Please <a href="{% url 'songwrytrapp:login' %}">login</a> or <a href="{% url 'songwrytrapp:register' %}">create account</a>.
     </div>
     {% endif %}

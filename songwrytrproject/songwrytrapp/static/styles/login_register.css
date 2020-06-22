@@ -1,0 +1,29 @@
+.errorlist {
+    color: red;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.registration-header {
+    margin: 20px 0;
+}
+
+.alternate-link {
+    font-size: .6em;
+}
+
+input {
+    cursor: pointer;
+}
+
+p {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px 0;
+}
+
+p label {
+    font-size: .8em;
+}

@@ -24,12 +24,12 @@ def register(request):
     return render(request, 'registration/register.html', {'form': f})
  
 class CustomUserCreationForm(forms.Form):
-    username = forms.CharField(label='Enter username', min_length=4, max_length=150)
-    first_name = forms.CharField(label='Enter first name')
-    last_name = forms.CharField(label='Enter last name')
-    email = forms.EmailField(label='Enter email')
-    password1 = forms.CharField(label='Enter password', widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Confirm password', widget=forms.PasswordInput)
+    username = forms.CharField(label='Username', min_length=4, max_length=150)
+    first_name = forms.CharField(label='First Name')
+    last_name = forms.CharField(label='Last Name')
+    email = forms.EmailField(label='Email')
+    password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
+    password2 = forms.CharField(label='Confirm Password', widget=forms.PasswordInput)
  
     def clean_username(self):
         username = self.cleaned_data['username'].lower()
