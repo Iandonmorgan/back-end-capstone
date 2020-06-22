@@ -6,6 +6,7 @@ app_name = "songwrytrapp"
 urlpatterns = [
     path('', home, name='home'),
     path('accounts/', include('django.contrib.auth.urls'), name='login'),
+    path('accounts/register/', register, name='register'),
     path('logout/', logout_user, name='logout'),
     path('writers/', writer_list, name='writers'),
     path('writer/form', writer_form, name='writer_form'),

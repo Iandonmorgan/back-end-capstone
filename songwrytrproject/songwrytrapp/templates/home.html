@@ -1,11 +1,15 @@
 {% extends 'shared/base.html' %}
+{% load static %}
 
 {% block content %}
 
     {% if request.user.id %}
     <p align="center">Welcome, {{request.user.first_name}}! </p>
     {% else %}
-    <p align="center">Welcome! Please <a href="{% url 'songwrytrapp:login' %}">login</a> for additional insights. </p>
+    <div align="center">
+        <div class="navList__route"><a href="{% url 'songwrytrapp:home'%}"><img src="{% static "img/songwrytr_logo_sm.png" %}" alt="SONGWRYTR" height="50px"></a></div><br /><br />
+        <div>Welcome!</div>Please <a href="{% url 'songwrytrapp:login' %}">login</a> or <a href="{% url 'songwrytrapp:register' %}">create account</a>.
+    </div>
     {% endif %}
 
 {% endblock %}

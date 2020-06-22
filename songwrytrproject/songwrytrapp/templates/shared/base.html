@@ -12,19 +12,17 @@
 
 <body>
 
-    <nav id="site-nav">
-        <ol class="navList">
-            <li class="navList__route"><a href="{% url 'songwrytrapp:home'%}"><img src="{% static "img/songwrytr_logo_sm.png" %}" alt="SONGWRYTR" height="50px"></a></li>
-            <li class="navList__route"><a href="{% url 'songwrytrapp:writers' %}">Writers</a></li>
-            <li class="navList__route"><a href="{% url 'songwrytrapp:compositions' %}">Compositions</a></li>
-            <li class="navList__route"><a href="{% url 'songwrytrapp:publishingcompanies' %}">Publishing</a></li>
-            {% if request.user.id %}
-            <li class="navList__route"><a href="{% url 'songwrytrapp:logout' %}">Logout</a></li>
-            {% else %}
-            <li class="navList__route"><a href="{% url 'songwrytrapp:login' %}">Login</a></li>
-            {% endif %}
-        </ol>
-    </nav>
+    {% if request.user.id %}
+        <nav id="site-nav">
+            <ol class="navList">
+                <li class="navList__route"><a href="{% url 'songwrytrapp:home'%}"><img src="{% static "img/songwrytr_logo_sm.png" %}" alt="SONGWRYTR" height="50px"></a></li>
+                <li class="navList__route"><a href="{% url 'songwrytrapp:writers' %}">Writers</a></li>
+                <li class="navList__route"><a href="{% url 'songwrytrapp:compositions' %}">Compositions</a></li>
+                <li class="navList__route"><a href="{% url 'songwrytrapp:publishingcompanies' %}">Publishing</a></li>
+                <li class="navList__route"><a href="{% url 'songwrytrapp:logout' %}">Logout</a></li>
+            </ol>
+        </nav>
+    {% endif %}
 
     <main class="main-content">
         {% block content %}

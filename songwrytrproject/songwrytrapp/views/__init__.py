@@ -9,3 +9,4 @@ from .publishingcompanies.details import publishingcompany_details
 from .compositions.list import composition_list
 from .compositions.form import composition_form, composition_edit_form, composition_writer_form, composition_publishing_form, composition_recording_form, composition_recording_delete, composition_recording_edit_form
 from .compositions.details import composition_details
+from .auth.register import CustomUserCreationForm, register
