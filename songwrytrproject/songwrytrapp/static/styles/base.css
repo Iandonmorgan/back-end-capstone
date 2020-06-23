@@ -57,6 +57,26 @@ button {
     margin: 0 20px 20px 0px;
 }
 
+.infotext {
+    font-size: .6em;
+}
+
+#showhide {
+    display: none;
+}
+
+.clickshowhide {
+    font-size: .8em;
+    font-weight: bold;
+}
+
+.underline {
+    text-decoration: underline;
+}
+.clickshowhide:hover {
+    cursor: pointer;
+}
+
 /* SEARCH BAR STYLING */
 
 #myInput {

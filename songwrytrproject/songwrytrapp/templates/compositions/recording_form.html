@@ -41,7 +41,8 @@
         {% csrf_token %}
         <fieldset>
             <label for="audio_url">Audio URL: </label>
-            <input id="audio_url" type="text" name="audio_url" value="{{recording.audio_url}}">
+            <input id="audio_url" type="text" name="audio_url" value="{{recording.audio_url}}"><a> </a><a class="clickshowhide" onclick="showhide()" href="#">more info</a>
+            <div id="showhide" class="infotext">To work properly with playback, an audio URL should link directly to the MP3 file.<br />To use Google Drive to host your files, you will be given a shareable link like this:<br/><span class="underline">https://drive.google.com/file/d/[UNIQUE GOOGLE FILE ID #]/view?usp=sharing</span><br/>However, the link you need to paste into this field should look like this, instead:<br/><span class="underline">https://docs.google.com/uc?export=download&id=[UNIQUE GOOGLE FILE ID #]</span><br/><br/></div>
         </fieldset>
         <fieldset>
             <label for="image_url">Image URL: </label>
@@ -78,4 +79,8 @@
         </fieldset>
         <input type="submit" value="Submit" />
         </form>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'scripts/showhide.js' %}"></script>
 {% endblock %}

@@ -122,10 +122,14 @@ def composition_writer_form(request, composition_id):
         composition = get_composition(composition_id)
         composition_writers = get_composition_writers(composition_id)
         all_writers = get_writers()
+        totalpct = 100
+        for cw in composition_writers:
+            totalpct -= cw.percentage
         template = 'compositions/writer_form.html'
         context = {
             'composition': composition,
-            'all_writers': all_writers
+            'all_writers': all_writers,
+            'totalpct': totalpct
         }
 
         return render(request, template, context)
@@ -168,11 +172,15 @@ def composition_publishing_form(request, composition_id):
         composition = get_composition(composition_id)
         composition_publishers = get_composition_publishers(composition_id)
         all_publishers = get_publishers()
+        totalpct = 100
+        for cp in composition_publishers:
+            totalpct -= cp.percentage
         template = 'compositions/publishing_form.html'
         context = {
             'composition': composition,
             'all_publishers': all_publishers,
-            'composition_publishers': composition_publishers
+            'composition_publishers': composition_publishers,
+            'totalpct': totalpct
         }
 
         return render(request, template, context)
