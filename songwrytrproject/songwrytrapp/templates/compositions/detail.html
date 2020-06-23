@@ -153,6 +153,9 @@
                             <div>Producer: {{ recording.producer }}</div>
                             <div>Artist: {{ recording.artist }}</div>
                             <div>Date Recorded: {{ recording.date_refactored }}</div>
+                            <div>
+                              {% if recording.is_mixed %}✅ Mixed | {% else %}❌ Not Mixed | {% endif %}{% if recording.is_mastered %}✅ Mastered | {% else %}❌ Not Mastered | {% endif %}{% if recording.is_delivered %}✅ Delivered{% else %}❌ Not Delivered{% endif %}
+                            </div>
                           </div>
                         </div>
                         <div>
