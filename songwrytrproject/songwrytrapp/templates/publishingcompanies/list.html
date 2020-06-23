@@ -32,16 +32,21 @@
 {% endblock %}
 
 {% block content %}
-        <a href="{% url 'songwrytrapp:publishingcompany_form' %}"><button class="plusminus_button margin-bottom-10"><img src="{% static "img/plus.png" %}" alt="Add Publishing Company" height="32px" style="vertical-align:middle"> ADD PUBLISHING COMPANY</button></a>
-    <ol>
-    {% for publishingcompany in all_publishingcompanies %}
-        {% if request.user.id == publishingcompany.user_id %}
-            <li>
-                <a href="{% url 'songwrytrapp:publishingcompany' publishingcompany.id %}">
-                {{ publishingcompany.name }}
-                </a>
-            </li>
-        {% endif %}
-    {% endfor %}
+    <a href="{% url 'songwrytrapp:publishingcompany_form' %}"><button class="plusminus_button margin-bottom-10"><img src="{% static "img/plus.png" %}" alt="Add Publishing Company" height="32px" style="vertical-align:middle"> ADD PUBLISHING COMPANY</button></a>
+    {% if all_publishingcompanies %} <input type="text" id="myInput" onkeyup="search()" placeholder="Search for publishing companies..."> {% endif %}
+    <ol id="myOL">
+        {% for publishingcompany in all_publishingcompanies %}
+            {% if request.user.id == publishingcompany.user_id %}
+                <li>
+                    <a href="{% url 'songwrytrapp:publishingcompany' publishingcompany.id %}">
+                    {{ publishingcompany.name }}
+                    </a>
+                </li>
+            {% endif %}
+        {% endfor %}
     </ol>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'scripts/search.js' %}"></script>
 {% endblock %}

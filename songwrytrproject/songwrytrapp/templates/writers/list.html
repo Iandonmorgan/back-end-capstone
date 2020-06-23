@@ -34,16 +34,16 @@
 {% block content %}
     {% comment %} <h1 class="header">Writers</h1> {% endcomment %}
     <a href="{% url 'songwrytrapp:writer_form' %}"><button class="plusminus_button margin-bottom-10"><img src="{% static "img/plus.png" %}" alt="Add Writer" height="32px" style="vertical-align:middle"> ADD WRITER</button></a>
-    {% if all_writers %} <input type="text" id="myInput" onkeyup="search_writers()" placeholder="Search for writers.."> {% endif %}
+    {% if all_writers %} <input type="text" id="myInput" onkeyup="search()" placeholder="Search for writers..."> {% endif %}
     <ol id="myOL">
-    {% for writer in all_writers %}
-        {% if request.user.id == writer.user_id %}
-            <li><a style="display: none">{{ writer.publishing_notes }} {{ writer.first_name }} {{ writer.last_name }}</a><a href="{% url 'songwrytrapp:writer' writer.id %}">{% if writer.last_name %}{{ writer.last_name }},{% endif %} {{ writer.first_name }}</a></li>
-        {% endif %}
-    {% endfor %}
+        {% for writer in all_writers %}
+            {% if request.user.id == writer.user_id %}
+                <li><a style="display: none">{{ writer.publishing_notes }} {{ writer.first_name }} {{ writer.last_name }}</a><a href="{% url 'songwrytrapp:writer' writer.id %}">{% if writer.last_name %}{{ writer.last_name }}, {% endif %}{{ writer.first_name }}</a></li>
+            {% endif %}
+        {% endfor %}
     </ol>
 {% endblock %}
 
 {% block scripts %}
-    <script src="{% static 'scripts/search_writers.js' %}"></script>
+    <script src="{% static 'scripts/search.js' %}"></script>
 {% endblock %}

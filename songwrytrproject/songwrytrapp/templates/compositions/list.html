@@ -33,15 +33,16 @@
 
 {% block content %}
         <a href="{% url 'songwrytrapp:composition_form' %}"><button class="plusminus_button margin-bottom-10"><img src="{% static "img/plus.png" %}" alt="Add Composition" height="32px" style="vertical-align:middle"> ADD COMPOSITION</button></a>
-    <ul style="list-style: none;">
-    {% for composition in all_compositions %}
-        {% if request.user.id == composition.user_id %}
-            <li>
-                <a href="{% url 'songwrytrapp:composition' composition.id %}">
-                "{{ composition.title }}"
-                </a>
-            </li>
-        {% endif %}
-    {% endfor %}
+    {% if all_compositions %} <input type="text" id="myInput" onkeyup="search()" placeholder="Search for compositions or lyrics..."> {% endif %}
+    <ol id="myOL">
+        {% for composition in all_compositions %}
+            {% if request.user.id == composition.user_id %}
+                <li><a style="display: none">{{ composition.title }} {{ composition.alt_titles }} {{ composition.lyrics }} {{ composition.notes }}</a><a href="{% url 'songwrytrapp:composition' composition.id %}">"{{ composition.title }}"</a></li>
+            {% endif %}
+        {% endfor %}
     </ol>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'scripts/search.js' %}"></script>
 {% endblock %}

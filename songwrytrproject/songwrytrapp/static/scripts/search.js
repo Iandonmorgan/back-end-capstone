@@ -1,6 +1,6 @@
 // https://www.w3schools.com/howto/howto_js_filter_lists.asp
 
-function search_writers() {
+function search() {
   // Declare variables
   var input, filter, ul, li, a, i, txtValue;
   input = document.getElementById('myInput');

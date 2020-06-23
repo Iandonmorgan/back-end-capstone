@@ -10,7 +10,7 @@ def publishingcompany_list(request):
     if request.method == 'GET':
         with sqlite3.connect(Connection.db_path) as conn:
             conn.row_factory = model_factory(PublishingCompany)
-            
+            user_id = request.user.id
             db_cursor = conn.cursor()
             db_cursor.execute("""
             SELECT
@@ -27,8 +27,9 @@ def publishingcompany_list(request):
             FROM songwrytrapp_publishingcompany pc
             JOIN songwrytrapp_pro p
             ON pc.pro_id = p.id
+            WHERE pc.user_id = ?
             ORDER BY pc.name
-            """)
+            """, (user_id,))
 
             all_publishingcompanies = db_cursor.fetchall()
 
