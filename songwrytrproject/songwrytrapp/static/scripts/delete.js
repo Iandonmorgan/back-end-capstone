@@ -6,7 +6,7 @@ const ConfirmDelete = () => {
     return false;
 }
 const ConfirmDeleteRecording = () => {
-  var x = confirm("Are you sure you want to delete this recording? This can not be undone!");
+  var x = confirm("Are you sure you want to delete? This can not be undone!");
   if (x)
       return true;
   else
