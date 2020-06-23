@@ -255,6 +255,78 @@
         "model": "songwrytrapp.pro",
         "pk": 22,
         "fields": {
+            "name": "APRA AMCOS",
+            "address": "Locked Bag 5000",
+            "city": "Strawberry Hills",
+            "state": "NSW",
+            "zipcode": "2012",
+            "website": "https://apraamcos.com.au/"
+        }
+    },
+    {
+        "model": "songwrytrapp.pro",
+        "pk": 23,
+        "fields": {
+            "name": "APRA AMCOS",
+            "address": "3-5 Sanders Place",
+            "city": "Richmond",
+            "state": "VIC",
+            "zipcode": "3121",
+            "website": "https://apraamcos.com.au/"
+        }
+    },
+    {
+        "model": "songwrytrapp.pro",
+        "pk": 24,
+        "fields": {
+            "name": "APRA AMCOS",
+            "address": "3 Winn Street",
+            "city": "Fortitude Valley",
+            "state": "QLD",
+            "zipcode": "4006",
+            "website": "https://apraamcos.com.au/"
+        }
+    },
+    {
+        "model": "songwrytrapp.pro",
+        "pk": 25,
+        "fields": {
+            "name": "APRA AMCOS",
+            "address": "Suite 29, 8-20 O’Connell Street",
+            "city": "North Adelaide",
+            "state": "SA",
+            "zipcode": "5006",
+            "website": "https://apraamcos.com.au/"
+        }
+    },
+    {
+        "model": "songwrytrapp.pro",
+        "pk": 26,
+        "fields": {
+            "name": "APRA AMCOS",
+            "address": "Level 2, 8 McMinn Street",
+            "city": "Darwin",
+            "state": "NT",
+            "zipcode": "0800",
+            "website": "https://apraamcos.com.au/"
+        }
+    },
+    {
+        "model": "songwrytrapp.pro",
+        "pk": 27,
+        "fields": {
+            "name": "APRA AMCOS",
+            "address": "Suite 1, 12-20 Railway Road",
+            "city": "Subiaco",
+            "state": "WA",
+            "zipcode": "6008",
+            "website": "https://apraamcos.com.au/"
+        }
+    },
+    {
+        "model": "songwrytrapp.pro",
+        "pk": 28,
+        "fields": {
             "name": "Other",
             "address": "n/a",
             "city": "n/a",

@@ -18,7 +18,7 @@
       {% csrf_token %}
       <fieldset>
           <label for="first_name">First Name: </label>
-          <input id="first_name" type="text" name="first_name" value="{{writer.first_name}}">
+          <input id="first_name" type="text" name="first_name" value="{{writer.first_name}}" required>
       </fieldset>
       <fieldset>
           <label for="last_name">Last Name: </label>

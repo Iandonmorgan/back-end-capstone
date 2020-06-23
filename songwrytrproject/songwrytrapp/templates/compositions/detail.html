@@ -134,12 +134,14 @@
                           </audio>
                         </div>
                       </div>
-                      <a href="{% url 'songwrytrapp:composition_recording_edit_form' composition.id recording.id %}"><button class="edit_button"><img src="{% static "img/edit.png" %}" alt="Edit Recording" height="16px" style="vertical-align:middle"> EDIT RECORDING</button></a>
-                      <form class="compositionRecording" action="{% url 'songwrytrapp:composition_recording_delete' composition.id recording.id %}" method="POST" onsubmit="return ConfirmDeleteRecording()">
-                        {% csrf_token %}
-                        <input type="hidden" name="actual_method" value="DELETE">
-                        <button class="plusminus_button"><img src="{% static "img/minus.png" %}" alt="Delete Recording" height="16px"> DELETE RECORDING </button>
-                      </form>
+                      <div class="details-buttons">
+                        <a href="{% url 'songwrytrapp:composition_recording_edit_form' composition.id recording.id %}"><button class="edit_button"><img src="{% static "img/edit.png" %}" alt="Edit Recording" height="16px" style="vertical-align:middle"> EDIT RECORDING</button></a>
+                        <form class="compositionRecording" action="{% url 'songwrytrapp:composition_recording_delete' composition.id recording.id %}" method="POST" onsubmit="return ConfirmDeleteRecording()">
+                          {% csrf_token %}
+                          <input type="hidden" name="actual_method" value="DELETE">
+                          <button class="plusminus_button"><img src="{% static "img/minus.png" %}" alt="Delete Recording" height="16px"> DELETE RECORDING </button>
+                        </form>
+                      </div>
                     </li>
                 {% endif %}
             {% endfor %}
