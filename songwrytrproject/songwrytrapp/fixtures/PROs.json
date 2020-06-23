@@ -39,6 +39,18 @@
         "model": "songwrytrapp.pro",
         "pk": 4,
         "fields": {
+            "name": "SOCAN",
+            "address": "41 Valleybrook Drive",
+            "city": "Toronto",
+            "state": "ON",
+            "zipcode": "M3B 2S6",
+            "website": "http://www.socan.com/"
+        }
+    },
+    {
+        "model": "songwrytrapp.pro",
+        "pk": 5,
+        "fields": {
             "name": "BMI",
             "address": "7 World Trade Center, 250 Greenwich St",
             "city": "New York",
@@ -49,7 +61,7 @@
     },
     {
         "model": "songwrytrapp.pro",
-        "pk": 5,
+        "pk": 6,
         "fields": {
             "name": "BMI",
             "address": "Tower Place 100, 3340 Peachtree Rd NE, Suite 570",
@@ -61,7 +73,7 @@
     },
     {
         "model": "songwrytrapp.pro",
-        "pk": 6,
+        "pk": 7,
         "fields": {
             "name": "BMI",
             "address": "1400 S Congress Ave Suite B 200",
@@ -73,7 +85,7 @@
     },
     {
         "model": "songwrytrapp.pro",
-        "pk": 7,
+        "pk": 8,
         "fields": {
             "name": "BMI",
             "address": "8730 Sunset Blvd, 3rd Floor West",
@@ -85,7 +97,7 @@
     },
     {
         "model": "songwrytrapp.pro",
-        "pk": 8,
+        "pk": 9,
         "fields": {
             "name": "BMI",
             "address": "84 Harley House, Marylebone Road",
@@ -97,7 +109,7 @@
     },
     {
         "model": "songwrytrapp.pro",
-        "pk": 9,
+        "pk": 10,
         "fields": {
             "name": "BMI",
             "address": "1250 Ave. Ponce de Leon, San Jose Building, Suite 1008",
@@ -109,7 +121,7 @@
     },
     {
         "model": "songwrytrapp.pro",
-        "pk": 10,
+        "pk": 11,
         "fields": {
             "name": "ASCAP",
             "address": "250 West 57th Street",
@@ -121,7 +133,7 @@
     },
     {
         "model": "songwrytrapp.pro",
-        "pk": 11,
+        "pk": 12,
         "fields": {
             "name": "ASCAP",
             "address": "7920 W. Sunset Boulevard, Third Floor",
@@ -133,7 +145,7 @@
     },
     {
         "model": "songwrytrapp.pro",
-        "pk": 12,
+        "pk": 13,
         "fields": {
             "name": "ASCAP",
             "address": "950 Joseph E. Lowery Blvd. NW, Suite 23",
@@ -145,7 +157,7 @@
     },
     {
         "model": "songwrytrapp.pro",
-        "pk": 13,
+        "pk": 14,
         "fields": {
             "name": "ASCAP",
             "address": "420 Lincoln Rd, Suite 502",
@@ -157,7 +169,7 @@
     },
     {
         "model": "songwrytrapp.pro",
-        "pk": 14,
+        "pk": 15,
         "fields": {
             "name": "ASCAP",
             "address": "623 Calle Hillside",
@@ -169,7 +181,7 @@
     },
     {
         "model": "songwrytrapp.pro",
-        "pk": 15,
+        "pk": 16,
         "fields": {
             "name": "ASCAP",
             "address": "4 Millbank, 2nd Floor",
@@ -181,7 +193,7 @@
     },
     {
         "model": "songwrytrapp.pro",
-        "pk": 16,
+        "pk": 17,
         "fields": {
             "name": "SESAC",
             "address": "152 West 57th Street, 57th Floor",
@@ -193,7 +205,7 @@
     },
     {
         "model": "songwrytrapp.pro",
-        "pk": 17,
+        "pk": 18,
         "fields": {
             "name": "SESAC",
             "address": "40 Wall St., 6th Floor",
@@ -205,7 +217,7 @@
     },
     {
         "model": "songwrytrapp.pro",
-        "pk": 18,
+        "pk": 19,
         "fields": {
             "name": "SESAC",
             "address": "1 Primrose St.",
@@ -217,7 +229,7 @@
     },
     {
         "model": "songwrytrapp.pro",
-        "pk": 19,
+        "pk": 20,
         "fields": {
             "name": "SESAC",
             "address": "2150 Colorado Ave., Suite 150",
@@ -229,7 +241,7 @@
     },
     {
         "model": "songwrytrapp.pro",
-        "pk": 20,
+        "pk": 21,
         "fields": {
             "name": "SESAC",
             "address": "Hohenstaufenstr. 1",
@@ -237,18 +249,6 @@
             "state": "Germany",
             "zipcode": "80801",
             "website": "https://www.sesac.com/"
-        }
-    },
-    {
-        "model": "songwrytrapp.pro",
-        "pk": 21,
-        "fields": {
-            "name": "SOCAN",
-            "address": "41 Valleybrook Drive",
-            "city": "Toronto",
-            "state": "ON",
-            "zipcode": "M3B 2S6",
-            "website": "http://www.socan.com/"
         }
     },
     {

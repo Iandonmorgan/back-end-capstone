@@ -8,7 +8,7 @@
 {% block content %}
     <h1 class="header">Writers</h1>
     <a href="{% url 'songwrytrapp:writer_form' %}"><button class="plusminus_button margin-bottom-30"><img src="{% static "img/plus.png" %}" alt="Add Writer" height="16px" style="vertical-align:middle"> ADD WRITER</button></a>
-    <input type="text" id="myInput" onkeyup="search_writers()" placeholder="Search for writers..">
+    {% if all_writers %} <input type="text" id="myInput" onkeyup="search_writers()" placeholder="Search for writers.."> {% endif %}
     <ol id="myOL">
     {% for writer in all_writers %}
         {% if request.user.id == writer.user_id %}
