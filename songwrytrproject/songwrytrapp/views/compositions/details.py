@@ -129,7 +129,9 @@ def composition_details(request, composition_id):
         return render(request, template, context)
     elif request.method == 'POST':
         form_data = request.POST
-
+        composition_writers = get_composition_writers(composition_id)
+        composition_publishingcompanies = get_composition_publishers(composition_id)
+        composition_recordings = get_composition_recordings(composition_id)
         # Check if this POST is for deleting a composition
         if (
             "actual_method" in form_data
@@ -137,7 +139,21 @@ def composition_details(request, composition_id):
         ):
             with sqlite3.connect(Connection.db_path) as conn:
                 db_cursor = conn.cursor()
-
+                for cw in composition_writers:
+                    db_cursor.execute("""
+                    DELETE FROM songwrytrapp_compositionwriter
+                    WHERE id = ?
+                    """, (cw.compositionwriter_id,))
+                for cpc in composition_publishingcompanies:
+                    db_cursor.execute("""
+                    DELETE FROM songwrytrapp_compositionpublishing
+                    WHERE id = ?
+                    """, (cpc.compositionpublishing_id,))
+                for cr in composition_recordings:
+                    db_cursor.execute("""
+                    DELETE FROM songwrytrapp_recording
+                    WHERE id = ?
+                    """, (cr.id,))
                 db_cursor.execute("""
                 DELETE FROM songwrytrapp_composition
                 WHERE id = ?
