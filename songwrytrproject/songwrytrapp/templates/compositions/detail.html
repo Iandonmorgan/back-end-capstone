@@ -114,8 +114,10 @@
                         <form class="compositionPublishing" action="{% url 'songwrytrapp:composition_publishing_remove' composition.id publishingcompany.compositionpublishing_id %}" method="POST">
                         <a href="{% url 'songwrytrapp:publishingcompany' publishingcompany.id %}">{{ publishingcompany.name }}</a><div class="cpcli_object">{{ publishingcompany.percentage }}%</div>{{ publishingcompany.pro }} Work ID: {{ publishingcompany.pro_work_num }}
                           {% csrf_token %}
-                          <input type="hidden" name="actual_method" value="DELETE">
-                          <button class="plusminus_button"><img src="{% static "img/minus.png" %}" alt="Remove Publishing Company" height="16px"></button>
+                          <div class="cpcli_object">
+                            <input type="hidden" name="actual_method" value="DELETE">
+                            <button class="plusminus_button"><img src="{% static "img/minus.png" %}" alt="Remove Publishing Company" height="16px"></button>
+                          </div>
                         </form>
                     </li>
                 {% endif %}
