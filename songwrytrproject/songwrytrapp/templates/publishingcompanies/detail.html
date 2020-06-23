@@ -34,15 +34,19 @@
     <div>PRO Account Number: {{ publishingcompany.pro_acct_num }}</div>
     <div>Administrator: {{ publishingcompany.admin }}</div>
     <div class="details-buttons">
-      <form action="{% url 'songwrytrapp:publishingcompany' publishingcompany.id %}" method="POST" onsubmit="return ConfirmDelete()">
-        {% csrf_token %}
-        <input type="hidden" name="actual_method" value="DELETE">
-        <button>Delete</button>
-      </form>
-      <form action="{% url 'songwrytrapp:publishingcompany_edit_form' publishingcompany.id %}" method="GET"> 
+      <div class="detail-button">
+        <form action="{% url 'songwrytrapp:publishingcompany_edit_form' publishingcompany.id %}" method="GET"> 
+            {% csrf_token %}
+            <button>Edit</button>
+        </form>
+      </div>
+      <div class="detail-button">
+        <form action="{% url 'songwrytrapp:publishingcompany' publishingcompany.id %}" method="POST" onsubmit="return ConfirmDelete()">
           {% csrf_token %}
-          <button>Edit</button>
-      </form>
+          <input type="hidden" name="actual_method" value="DELETE">
+          <button>Delete</button>
+        </form>
+      </div>
     </div>
   {% else %}
     <h1>No user exists with specified ID</h1>

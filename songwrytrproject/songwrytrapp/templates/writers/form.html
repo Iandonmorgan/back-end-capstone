@@ -32,13 +32,12 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Writer</h1>
-
-
     {% if writer.id is not None %}
+        <h1>Update Writer</h1>
         <form action="{% url 'songwrytrapp:writer' writer.id %}" method="post">
           <input type="hidden" name="actual_method" value="PUT">
     {% else %}
+        <h1>Add Writer</h1>
         <form action="{% url 'songwrytrapp:writers' %}" method="post">
     {% endif %}
       {% csrf_token %}

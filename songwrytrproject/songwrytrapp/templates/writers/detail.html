@@ -34,20 +34,24 @@
 {% block content %}
   {% if request.user.id == writer.user_id %}
     <h1>{{ writer.first_name }} {{ writer.last_name }}</h1>
+    <div class="details-buttons">
+      <div class="detail-button">
+        <form action="{% url 'songwrytrapp:writer_edit_form' writer.id %}" method="GET"> 
+            {% csrf_token %}
+            <button>Edit</button>
+        </form>
+      </div>
+      <div class="detail-button">
+        <form action="{% url 'songwrytrapp:writer' writer.id %}" method="POST" onsubmit="return ConfirmDelete()">
+          {% csrf_token %}
+          <input type="hidden" name="actual_method" value="DELETE">
+          <button>Delete</button>
+        </form>
+      </div>
+    </div>
     <div>PRO: {{ writer.pro.name }}</div>
     <div>PRO IPI: {{ writer.pro_ipi }}</div>
     <div>Notes: {{ writer.publishing_notes|linebreaksbr }}</div>
-    <div class="details-buttons">
-      <form action="{% url 'songwrytrapp:writer' writer.id %}" method="POST" onsubmit="return ConfirmDelete()">
-        {% csrf_token %}
-        <input type="hidden" name="actual_method" value="DELETE">
-        <button>Delete</button>
-      </form>
-      <form action="{% url 'songwrytrapp:writer_edit_form' writer.id %}" method="GET"> 
-          {% csrf_token %}
-          <button>Edit</button>
-      </form>
-    </div>
   {% else %}
     <h1>No user exists with specified ID</h1>
   {% endif %}

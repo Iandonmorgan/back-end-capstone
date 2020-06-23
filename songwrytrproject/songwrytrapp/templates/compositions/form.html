@@ -32,13 +32,12 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Compositions</h1>
-
-
     {% if composition.id is not None %}
+        <h1>Update Composition</h1>
         <form action="{% url 'songwrytrapp:composition' composition.id %}" method="post">
           <input type="hidden" name="actual_method" value="PUT">
     {% else %}
+        <h1>Add Composition</h1>
         <form action="{% url 'songwrytrapp:compositions' %}" method="post">
     {% endif %}
       {% csrf_token %}
