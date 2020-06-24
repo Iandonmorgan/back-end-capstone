@@ -30,7 +30,65 @@
 {% block content %}
 
     {% if request.user.id %}
-    <p align="center">Welcome, {{request.user.first_name}}! </p>
+    <h2 align="center">Welcome, {{request.user.first_name}}! </h2>
+    <p class="dashboard_header underline margin-bottom-0">Recent Recordings</p>
+    {% for recording in recent_recordings %}
+        {% if request.user.id == recording.user_id %}
+            <div class="recording">
+                <div id="recording_item" class="recording_columns">
+                    <div class="left_column">
+                        <div>
+                            {% if recording.image_url %}
+                                <img src="{{ recording.image_url }}" class="recent_recording_image" width="200px">
+                            {% else %}
+                                <img src="{% static "img/recording.png" %}" class="recent_recording_image" width="200px">
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="right_column">
+                        <div><a href="{% url 'songwrytrapp:composition' recording.composition_id %}">"{{recording.title}}"</a>{% if recording.recording_type %} ({{ recording.recording_type }}){% endif %}
+                        <div>Producer: {{ recording.producer }}</div>
+                        <div>Artist: {{ recording.artist }}</div>
+                        <div>Date Recorded: {{ recording.date_refactored }}</div>
+                        <div>
+                            <audio controls id="player" controlsList="nodownload">
+                            <source src="{{ recording.audio_url }}">
+                            Your browser does not support the audio element.
+                            </audio>
+                        </div>
+                        <div>
+                            {% if recording.is_mixed == "on" %}✅ Mixed | {% else %}❌ Not Mixed | {% endif %}{% if recording.is_mastered == "on" %}✅ Mastered | {% else %}❌ Not Mastered | {% endif %}{% if recording.is_delivered == "on" %}✅ Delivered{% else %}❌ Not Delivered{% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+    <p class="dashboard_header underline margin-bottom-0">Recent Compositions</p>
+    <ol id="myOL">
+        {% for composition in recent_compositions %}
+            {% if request.user.id == composition.user_id %}
+                <li class="recent_composition">
+                    <a href="{% url 'songwrytrapp:composition' composition.id %}">"{{ composition.title }}"
+                        <div class="composition_details">
+                            Songwriters: 
+                            {% for writer in all_composition_writers %}
+                                {% if writer.composition_id == composition.id %}
+                                    {{ writer.first_name }} {{ writer.last_name }}<span class="composition_songwriters">, </span>
+                                {% endif %}
+                            {% endfor %}
+                            | 
+                            {% for pubco in all_composition_publishing %}
+                                {% if pubco.composition_id == composition.id %}
+                                    {{ pubco.name }}<span class="composition_pubco">, </span>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </a>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ol>
     {% else %}
     <div align="center">
         <div class="navList__route"><a href="{% url 'songwrytrapp:home'%}"><img src="{% static "img/songwrytr_logo_sm.png" %}" alt="SONGWRYTR" height="77px"></a></div><br /><br />

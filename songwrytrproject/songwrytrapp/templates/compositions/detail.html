@@ -136,25 +136,31 @@
             {% for recording in composition_recordings %}
                 {% if request.user.id == recording.user_id %}
                     <li class="recli">
-                      "{{ composition.title }}"
                       <div class="recording">
                         <div class="recording_columns">
                           <div class="left_column">
                             <div>
-                              <img src="{{ recording.image_url }}" class="recording_image">
+                              {% if recording.image_url %}
+                                    <img src="{{ recording.image_url }}" class="recording_image">
+                                {% else %}
+                                    <img src="{% static "img/recording.png" %}" class="recording_image">
+                                {% endif %}
                             </div>
                           </div>
                           <div class="right_column">
-                          {% if recording.recording_type %}
                             <div>
-                            Type: {{ recording.recording_type }}
+                              "{{ composition.title }}"
                             </div>
-                          {% endif %}
+                            {% if recording.recording_type %}
+                              <div>
+                                Type: {{ recording.recording_type }}
+                              </div>
+                            {% endif %}
                             <div>Producer: {{ recording.producer }}</div>
                             <div>Artist: {{ recording.artist }}</div>
                             <div>Date Recorded: {{ recording.date_refactored }}</div>
                             <div>
-                              {% if recording.is_mixed %}✅ Mixed | {% else %}❌ Not Mixed | {% endif %}{% if recording.is_mastered %}✅ Mastered | {% else %}❌ Not Mastered | {% endif %}{% if recording.is_delivered %}✅ Delivered{% else %}❌ Not Delivered{% endif %}
+                              {% if recording.is_mixed == "on" %}✅ Mixed | {% else %}❌ Not Mixed | {% endif %}{% if recording.is_mastered == "on" %}✅ Mastered | {% else %}❌ Not Mastered | {% endif %}{% if recording.is_delivered == "on" %}✅ Delivered{% else %}❌ Not Delivered{% endif %}
                             </div>
                           </div>
                         </div>

@@ -32,7 +32,7 @@
 {% endblock %}
 
 {% block content %}
-        <a href="{% url 'songwrytrapp:composition_form' %}"><button class="plusminus_button margin-bottom-10"><img src="{% static "img/plus.png" %}" alt="Add Composition" height="32px" style="vertical-align:middle"> ADD COMPOSITION</button></a>
+    <a href="{% url 'songwrytrapp:composition_form' %}"><button class="plusminus_button margin-bottom-10"><img src="{% static "img/plus.png" %}" alt="Add Composition" height="32px" style="vertical-align:middle"> ADD COMPOSITION</button></a>
     {% if all_compositions %} <input type="text" id="myInput" onkeyup="search()" placeholder="Search for compositions or lyrics..."> {% endif %}
     <ol id="myOL">
         {% for composition in all_compositions %}
