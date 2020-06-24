@@ -5,23 +5,53 @@
     <link rel="stylesheet" href="{% static 'styles/writers.css' %}" />
 {% endblock %}
 
+{% block navbar %}
+    {% if request.user.id %}
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="{% url 'songwrytrapp:home'%}"><img src="{% static "img/songwrytr_logo_sm.png" %}" alt="SONGWRYTR" height="50px"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'songwrytrapp:writers' %}">Writers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'songwrytrapp:compositions' %}">Compositions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'songwrytrapp:publishingcompanies' %}">Publishing</a>
+                    </li>
+                </ul>
+                <a class="form-inline my-2 my-lg-0" href="{% url 'songwrytrapp:logout' %}">Logout</a>
+            </div>
+        </nav>
+    {% endif %}
+{% endblock %}
+
 {% block content %}
   {% if request.user.id == writer.user_id %}
     <h1>{{ writer.first_name }} {{ writer.last_name }}</h1>
+    <div class="details-buttons">
+      <div class="detail-button">
+        <form action="{% url 'songwrytrapp:writer_edit_form' writer.id %}" method="GET"> 
+            {% csrf_token %}
+            <button>Edit</button>
+        </form>
+      </div>
+      <div class="detail-button">
+        <form action="{% url 'songwrytrapp:writer' writer.id %}" method="POST" onsubmit="return ConfirmDeleteWriter()">
+          {% csrf_token %}
+          <input type="hidden" name="actual_method" value="DELETE">
+          <button>Delete</button>
+        </form>
+      </div>
+    </div>
     <div>PRO: {{ writer.pro.name }}</div>
     <div>PRO IPI: {{ writer.pro_ipi }}</div>
-    <div>Notes: {{ writer.publishing_notes|linebreaks }}</div>
-    <div class="details-buttons">
-      <form action="{% url 'songwrytrapp:writer' writer.id %}" method="POST" onsubmit="return ConfirmDelete()">
-        {% csrf_token %}
-        <input type="hidden" name="actual_method" value="DELETE">
-        <button>Delete</button>
-      </form>
-      <form action="{% url 'songwrytrapp:writer_edit_form' writer.id %}" method="GET"> 
-          {% csrf_token %}
-          <button>Edit</button>
-      </form>
-    </div>
+    <div>Notes: {{ writer.publishing_notes|linebreaksbr }}</div>
   {% else %}
     <h1>No user exists with specified ID</h1>
   {% endif %}

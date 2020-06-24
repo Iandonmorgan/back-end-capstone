@@ -1,6 +1,32 @@
 {% extends 'shared/base.html' %}
 {% load static %}
 
+{% block navbar %}
+    {% if request.user.id %}
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="{% url 'songwrytrapp:home'%}"><img src="{% static "img/songwrytr_logo_sm.png" %}" alt="SONGWRYTR" height="50px"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'songwrytrapp:writers' %}">Writers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'songwrytrapp:compositions' %}">Compositions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'songwrytrapp:publishingcompanies' %}">Publishing</a>
+                    </li>
+                </ul>
+                <a class="form-inline my-2 my-lg-0" href="{% url 'songwrytrapp:logout' %}">Logout</a>
+            </div>
+        </nav>
+    {% endif %}
+{% endblock %}
+
 {% block content %}
   {% if request.user.id == publishingcompany.user_id %}
     <h1>{{ publishingcompany.name }}</h1>
@@ -8,15 +34,19 @@
     <div>PRO Account Number: {{ publishingcompany.pro_acct_num }}</div>
     <div>Administrator: {{ publishingcompany.admin }}</div>
     <div class="details-buttons">
-      <form action="{% url 'songwrytrapp:publishingcompany' publishingcompany.id %}" method="POST" onsubmit="return ConfirmDelete()">
-        {% csrf_token %}
-        <input type="hidden" name="actual_method" value="DELETE">
-        <button>Delete</button>
-      </form>
-      <form action="{% url 'songwrytrapp:publishingcompany_edit_form' publishingcompany.id %}" method="GET"> 
+      <div class="detail-button">
+        <form action="{% url 'songwrytrapp:publishingcompany_edit_form' publishingcompany.id %}" method="GET"> 
+            {% csrf_token %}
+            <button>Edit</button>
+        </form>
+      </div>
+      <div class="detail-button">
+        <form action="{% url 'songwrytrapp:publishingcompany' publishingcompany.id %}" method="POST" onsubmit="return ConfirmDeletePublishingCompany()">
           {% csrf_token %}
-          <button>Edit</button>
-      </form>
+          <input type="hidden" name="actual_method" value="DELETE">
+          <button>Delete</button>
+        </form>
+      </div>
     </div>
   {% else %}
     <h1>No user exists with specified ID</h1>

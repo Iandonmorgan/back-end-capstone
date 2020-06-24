@@ -5,21 +5,47 @@
     <link rel="stylesheet" href="{% static 'styles/compositions.css' %}" />
 {% endblock %}
 
+{% block navbar %}
+    {% if request.user.id %}
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="{% url 'songwrytrapp:home'%}"><img src="{% static "img/songwrytr_logo_sm.png" %}" alt="SONGWRYTR" height="50px"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'songwrytrapp:writers' %}">Writers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'songwrytrapp:compositions' %}">Compositions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'songwrytrapp:publishingcompanies' %}">Publishing</a>
+                    </li>
+                </ul>
+                <a class="form-inline my-2 my-lg-0" href="{% url 'songwrytrapp:logout' %}">Logout</a>
+            </div>
+        </nav>
+    {% endif %}
+{% endblock %}
+
 {% block content %}
   {% if request.user.id == composition.user_id %}
     <h1>"{{ composition.title }}"</h1>
     <div class="details-buttons">
       <div class="detail-button">
-        <form action="{% url 'songwrytrapp:composition' composition.id %}" method="POST" onsubmit="return ConfirmDelete()">
-          {% csrf_token %}
-          <input type="hidden" name="actual_method" value="DELETE">
-          <button>Delete</button>
-        </form>
-      </div>
-      <div class="detail-button">
         <form action="{% url 'songwrytrapp:composition_edit_form' composition.id %}" method="GET"> 
             {% csrf_token %}
             <button>Edit</button>
+        </form>
+      </div>
+      <div class="detail-button">
+        <form action="{% url 'songwrytrapp:composition' composition.id %}" method="POST" onsubmit="return ConfirmDeleteComposition()">
+          {% csrf_token %}
+          <input type="hidden" name="actual_method" value="DELETE">
+          <button>Delete</button>
         </form>
       </div>
     </div>
@@ -58,21 +84,24 @@
       <label for="collapsible3" class="lbl-toggle">Writer Share</label>
       <div class="collapsible-content">
         <div class="content-inner">
-          <ul style="list-style: none;">
+          <div style="list-style: none;">
             {% for writer in composition_writers %}
-                {% if request.user.id == writer.user_id %}
-                    <li class="cwli">
-                        <form class="compositionWriter" action="{% url 'songwrytrapp:composition_writer_form' writer.compositionwriter_id %}" method="POST">
-                        <a href="{% url 'songwrytrapp:writer' writer.id %}">{{ writer.first_name }} {{ writer.last_name }}</a><div class="cwli_object">{{ writer.percentage }}%</div>
-                          {% csrf_token %}
-                          <input type="hidden" name="actual_method" value="DELETE">
-                          <button class="plusminus_button"><img src="{% static "img/minus.png" %}" alt="Remove Writer" height="16px"></button>
-                        </form>
-                    </li>
-                {% endif %}
+              {% if request.user.id == writer.user_id %}
+                <div class="cwli">
+                  <a href="{% url 'songwrytrapp:writer' writer.id %}">{{ writer.first_name }} {{ writer.last_name }}</a><div class="cwli_object">{{ writer.percentage }}%</div>
+                  <div class="details-buttons">
+                    <a href="{% url 'songwrytrapp:composition_writer_edit_form' composition.id writer.compositionwriter_id %}"><button class="edit_button"><img src="{% static "img/edit.png" %}" alt="Edit Composition Writer" height="16px" style="vertical-align:middle"></button></a>
+                    <form class="compositionWriter" action="{% url 'songwrytrapp:composition_writer_remove' composition.id writer.compositionwriter_id %}" method="POST">
+                      {% csrf_token %}
+                      <input type="hidden" name="actual_method" value="DELETE">
+                      <button class="plusminus_button"><img src="{% static "img/minus.png" %}" alt="Remove Writer" height="16px"></button>
+                    </form>
+                  </div>
+                </div>
+              {% endif %}
             {% endfor %}
-            <li class="cwli"><a href="{% url 'songwrytrapp:composition_writer_form' composition.id %}"><button class="plusminus_button"><img src="{% static "img/plus.png" %}" alt="Attach Writer" height="16px" style="vertical-align:middle"> ATTACH WRITER</button></a></li>
-          </ul>
+            <div class="cwli"><a href="{% url 'songwrytrapp:composition_writer_form' composition.id %}"><button class="plusminus_button"><img src="{% static "img/plus.png" %}" alt="Attach Writer" height="16px" style="vertical-align:middle"> ATTACH WRITER</button></a></div>
+          </div>
         </div>
       </div>
     </div>
@@ -81,21 +110,24 @@
       <label for="collapsible4" class="lbl-toggle">Publishing Share</label>
       <div class="collapsible-content">
         <div class="content-inner">
-          <ul style="list-style: none;">
+          <div>
             {% for publishingcompany in composition_publishingcompanies %}
                 {% if request.user.id == publishingcompany.user_id %}
-                    <li class="cpcli">
-                        <form class="compositionPublishing" action="{% url 'songwrytrapp:composition_publishing_form' publishingcompany.compositionpublishing_id %}" method="POST">
-                        <a href="{% url 'songwrytrapp:publishingcompany' publishingcompany.id %}">{{ publishingcompany.name }}</a><div class="cpcli_object">{{ publishingcompany.percentage }}%</div>{{ publishingcompany.pro }} Work ID: {{ publishingcompany.pro_work_num }}
-                          {% csrf_token %}
-                          <input type="hidden" name="actual_method" value="DELETE">
-                          <button class="plusminus_button"><img src="{% static "img/minus.png" %}" alt="Remove Publishing Company" height="16px"></button>
-                        </form>
-                    </li>
+                    <div class="cpcli">
+                      <a href="{% url 'songwrytrapp:publishingcompany' publishingcompany.id %}">{{ publishingcompany.name }}</a><div class="cpcli_object">{{ publishingcompany.percentage }}%</div>{{ publishingcompany.pro }} Work ID: {{ publishingcompany.pro_work_num }}
+                        <div class="details-buttons cpcli_object">
+                          <a href="{% url 'songwrytrapp:composition_publishing_edit_form' composition.id publishingcompany.compositionpublishing_id %}"><button class="edit_button"><img src="{% static "img/edit.png" %}" alt="Edit Composition Publishing Company" height="16px" style="vertical-align:middle"></button></a>
+                          <form class="compositionPublishing" action="{% url 'songwrytrapp:composition_publishing_remove' composition.id publishingcompany.compositionpublishing_id %}" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="actual_method" value="DELETE">
+                            <button class="plusminus_button"><img src="{% static "img/minus.png" %}" alt="Remove Publishing Company" height="16px"></button>
+                          </form>
+                        </div>
+                    </div>
                 {% endif %}
             {% endfor %}
             <li class="cpcli"><a href="{% url 'songwrytrapp:composition_publishing_form' composition.id %}"><button class="plusminus_button"><img src="{% static "img/plus.png" %}" alt="Attach Publishing Company" height="16px" style="vertical-align:middle"> ATTACH PUBLISHING COMPANY</button></a></li>
-          </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -104,27 +136,36 @@
       <label for="collapsible5" class="lbl-toggle">Recordings</label>
       <div class="collapsible-content">
         <div class="content-inner">
-          <ul style="list-style: none;">
+          <div style="list-style: none;">
             {% for recording in composition_recordings %}
                 {% if request.user.id == recording.user_id %}
-                    <li class="recli">
-                      "{{ composition.title }}"
+                    <div class="recli">
                       <div class="recording">
                         <div class="recording_columns">
                           <div class="left_column">
                             <div>
-                              <img src="{{ recording.image_url }}" class="recording_image">
+                              {% if recording.image_url %}
+                                    <img src="{{ recording.image_url }}" class="recording_image">
+                                {% else %}
+                                    <img src="{% static "img/recording.png" %}" class="recording_image">
+                                {% endif %}
                             </div>
                           </div>
                           <div class="right_column">
-                          {% if recording.recording_type %}
                             <div>
-                            Type: {{ recording.recording_type }}
+                              "{{ composition.title }}"
                             </div>
-                          {% endif %}
+                            {% if recording.recording_type %}
+                              <div>
+                                Type: {{ recording.recording_type }}
+                              </div>
+                            {% endif %}
                             <div>Producer: {{ recording.producer }}</div>
                             <div>Artist: {{ recording.artist }}</div>
                             <div>Date Recorded: {{ recording.date_refactored }}</div>
+                            <div>
+                              {% if recording.is_mixed == "on" %}✅ Mixed | {% else %}❌ Not Mixed | {% endif %}{% if recording.is_mastered == "on" %}✅ Mastered | {% else %}❌ Not Mastered | {% endif %}{% if recording.is_delivered == "on" %}✅ Delivered{% else %}❌ Not Delivered{% endif %}
+                            </div>
                           </div>
                         </div>
                         <div>
@@ -134,17 +175,19 @@
                           </audio>
                         </div>
                       </div>
-                      <a href="{% url 'songwrytrapp:composition_recording_edit_form' composition.id  recording.id %}"><button class="edit_button"><img src="{% static "img/edit.png" %}" alt="Edit Recording" height="16px" style="vertical-align:middle"> EDIT RECORDING</button></a>
-                      <form class="compositionRecording" action="{% url 'songwrytrapp:composition_recording_delete' composition.id recording.id %}" method="POST" onsubmit="return ConfirmDeleteRecording()">
-                        {% csrf_token %}
-                        <input type="hidden" name="actual_method" value="DELETE">
-                        <button class="plusminus_button"><img src="{% static "img/minus.png" %}" alt="Delete Recording" height="16px"> DELETE RECORDING </button>
-                      </form>
-                    </li>
+                      <div class="details-buttons">
+                        <a href="{% url 'songwrytrapp:composition_recording_edit_form' composition.id recording.id %}"><button class="edit_button"><img src="{% static "img/edit.png" %}" alt="Edit Recording" height="16px" style="vertical-align:middle"> EDIT RECORDING</button></a>
+                        <form class="compositionRecording" action="{% url 'songwrytrapp:composition_recording_delete' composition.id recording.id %}" method="POST" onsubmit="return ConfirmDeleteRecording()">
+                          {% csrf_token %}
+                          <input type="hidden" name="actual_method" value="DELETE">
+                          <button class="plusminus_button"><img src="{% static "img/minus.png" %}" alt="Delete Recording" height="16px"> DELETE RECORDING </button>
+                        </form>
+                      </div>
+                    </div>
                 {% endif %}
             {% endfor %}
-            <li class="recli"><a href="{% url 'songwrytrapp:composition_recording_form' composition.id %}"><button class="plusminus_button"><img src="{% static "img/plus.png" %}" alt="Add Recording" height="16px" style="vertical-align:middle"> ADD RECORDING</button></a></li>
-          </ul>
+            <div class="recli"><a href="{% url 'songwrytrapp:composition_recording_form' composition.id %}"><button class="plusminus_button"><img src="{% static "img/plus.png" %}" alt="Add Recording" height="16px" style="vertical-align:middle"> ADD RECORDING</button></a></li>
+          </div>
         </div>
       </div>
     </div>

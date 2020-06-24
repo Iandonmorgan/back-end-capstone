@@ -3,6 +3,32 @@
 
 {% comment %} DO NOT IMPORT COMPOSITIONS.CSS AS THE CHECKBOXES WILL DISAPPEAR {% endcomment %}
 
+{% block navbar %}
+    {% if request.user.id %}
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="{% url 'songwrytrapp:home'%}"><img src="{% static "img/songwrytr_logo_sm.png" %}" alt="SONGWRYTR" height="50px"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'songwrytrapp:writers' %}">Writers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'songwrytrapp:compositions' %}">Compositions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'songwrytrapp:publishingcompanies' %}">Publishing</a>
+                    </li>
+                </ul>
+                <a class="form-inline my-2 my-lg-0" href="{% url 'songwrytrapp:logout' %}">Logout</a>
+            </div>
+        </nav>
+    {% endif %}
+{% endblock %}
+
 {% block content %}
     {% if recording.id is not None %}
         <h1>Update recording for "{{ composition.title }}"</h1>
@@ -15,11 +41,39 @@
         {% csrf_token %}
         <fieldset>
             <label for="audio_url">Audio URL: </label>
-            <input id="audio_url" type="text" name="audio_url" value="{{recording.audio_url}}">
+            <input id="audio_url" type="text" name="audio_url" value="{{recording.audio_url}}"><a> </a><a class="clickshowhide" onclick="showhide()" href="#">more info</a>
+            <div id="showhide" class="infotext">
+                To work properly with playback, an audio URL should link directly to an audio file.<br/>
+                The recommended file type is MP3. <a class="clickshowhide" onclick="showhide2()" href="#">Click for instructions on using Google Drive to host your audio files</a><br/><br/>
+                <div id="showhide2" class="infotext">
+                    To use Google Drive to host your files, you will be given a shareable link like this:<br/>
+                    <span class="underline">https://drive.google.com/file/d/[UNIQUE GOOGLE FILE ID #]/view?usp=sharing</span><br/>
+                    However, the link you need to paste into this field should look like this, instead:<br/>
+                    <span class="underline">https://docs.google.com/uc?export=download&id=[UNIQUE GOOGLE FILE ID #]</span><br/><br/>
+                    **NOTE: Google Drive does limit the number of times your file can be accessed<br />
+                    in 24hr period (estimated allowance of 50-100 times per day). For this reason,<br/>
+                    we recommend having an offline back-up of your files for uninterrupted access.<br/>
+                    <br/><br/>
+                </div>
+            </div>
         </fieldset>
         <fieldset>
             <label for="image_url">Image URL: </label>
-            <input id="image_url" type="text" name="image_url" value="{{recording.image_url}}">
+            <input id="image_url" type="text" name="image_url" value="{{recording.image_url}}"><a> </a><a class="clickshowhide" onclick="showhide3()" href="#">more info</a>
+            <div id="showhide3" class="infotext">
+                To display properly, an image URL should link directly to an image file.<br/>
+                The recommended file type is JPG. <a class="clickshowhide" onclick="showhide4()" href="#">Click for instructions on using Google Drive to host your image files</a><br/><br/>
+                <div id="showhide4" class="infotext">
+                    To use Google Drive to host your files, you will be given a shareable link like this:<br/>
+                    <span class="underline">https://drive.google.com/file/d/[UNIQUE GOOGLE FILE ID #]/view?usp=sharing</span><br/>
+                    However, the link you need to paste into this field should look like this, instead:<br/>
+                    <span class="underline">https://docs.google.com/uc?export=download&id=[UNIQUE GOOGLE FILE ID #]</span><br/><br/>
+                    **NOTE: Google Drive does limit the number of times your file can be accessed<br />
+                    in 24hr period (estimated allowance of 50-100 times per day). For this reason,<br/>
+                    we recommend having an offline back-up of your files for uninterrupted access.<br/>
+                    <br/><br/>
+                </div>
+            </div>
         </fieldset>
         <fieldset>
             <label for="producer">Producer: </label>
@@ -52,4 +106,8 @@
         </fieldset>
         <input type="submit" value="Submit" />
         </form>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'scripts/showhide.js' %}"></script>
 {% endblock %}

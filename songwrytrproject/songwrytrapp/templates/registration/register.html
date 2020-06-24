@@ -1,6 +1,10 @@
 {% extends 'shared/base.html' %}
 {% load static %}
 
+{% block css %}
+<link rel="stylesheet" href="{% static 'styles/login_register.css' %}" />
+{% endblock %}
+
 {% block content %}
  
      <div class="login">
@@ -14,19 +18,20 @@
         {% endif %}
  
         <div align="center">
-            <div class="navList__route"><a href="{% url 'songwrytrapp:home'%}"><img src="{% static "img/songwrytr_logo_sm.png" %}" alt="SONGWRYTR" height="50px"></a></div><br /><br />
-            <div>Create account</div>
+            <div class="navList__route"><a href="{% url 'songwrytrapp:home'%}"><img src="{% static "img/songwrytr_logo_sm.png" %}" alt="SONGWRYTR" height="77px"></a></div>
+            <div class="registration-header">Create account</div>
  
             <form method="post" >
                 {% csrf_token %}
                 <table>
-                    {{ form.as_table }}
+                    {{ form.as_p }}
                     <tr>
                         <td></td>
                         <td><input type="submit" name="submit" value="Register" /></td>
                     </tr>
                 </table>
             </form>
+            <div class="alternate-link">or <a href="{% url 'songwrytrapp:login' %}">login</a> here</div>
         </div>
  
 {% endblock %}

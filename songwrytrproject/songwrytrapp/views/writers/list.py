@@ -10,14 +10,21 @@ def writer_list(request):
     if request.method == 'GET':
         with sqlite3.connect(Connection.db_path) as conn:
             conn.row_factory = model_factory(Writer)
-            
+            user_id = request.user.id
             db_cursor = conn.cursor()
             db_cursor.execute("""
             SELECT
-                w.*
+                w.id,
+                w.user_id,
+                w.first_name,
+                w.last_name,
+                w.publishing_notes,
+                w.pro_id,
+                w.pro_ipi
             FROM songwrytrapp_writer w
+            WHERE w.user_id = ?
             ORDER BY w.last_name
-            """)
+            """, (user_id,))
 
             all_writers = db_cursor.fetchall()
 

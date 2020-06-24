@@ -1,5 +1,6 @@
 #player {
     width: 100%;
+    margin-top: 10px;
 }
 
 .recording_image {
@@ -52,6 +53,7 @@
 
 .cwli {
     margin: 5px 0;
+    display: flex;
 }
 
 .cwli_object {
@@ -70,18 +72,9 @@
     align-content: space-between;
 }
 
-.details-buttons {
-    display: flex;
-    flex-flow: row wrap;
-    align-content: space-between;
-}
-
-.detail-button {
-    margin: -20px 20px 40px 0px;
-}
-
 .cpcli {
     margin: 5px 0;
+    display: flex;
 }
 
 .cpcli_object {
@@ -89,7 +82,7 @@
 }
 
 .recli {
-    margin: 5px 0;
+    margin: 5px 0 20px 0;
 }
 
 .recli_object {
@@ -124,6 +117,7 @@ input[type='checkbox'] {
 
     border-radius: 7px;
     transition: all 0.25s ease-out;
+    margin-bottom: 0;
 }
 
 .lbl-toggle:hover {

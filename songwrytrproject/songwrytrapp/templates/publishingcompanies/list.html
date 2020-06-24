@@ -1,22 +1,52 @@
 {% extends 'shared/base.html' %}
 {% load static %}
 
+{% block navbar %}
+    {% if request.user.id %}
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="{% url 'songwrytrapp:home'%}"><img src="{% static "img/songwrytr_logo_sm.png" %}" alt="SONGWRYTR" height="50px"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'songwrytrapp:writers' %}">Writers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'songwrytrapp:compositions' %}">Compositions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'songwrytrapp:publishingcompanies' %}">Publishing</a>
+                    </li>
+                </ul>
+                <a class="form-inline my-2 my-lg-0" href="{% url 'songwrytrapp:logout' %}">Logout</a>
+            </div>
+        </nav>
+    {% endif %}
+{% endblock %}
+
 {% block css %}
     <link rel="stylesheet" href="{% static 'styles/publishingcompanies.css' %}" />
 {% endblock %}
 
 {% block content %}
-    <h1>Publishing Companies</h1>
-        <a href="{% url 'songwrytrapp:publishingcompany_form' %}"><button class="plusminus_button"><img src="{% static "img/plus.png" %}" alt="Add Publishing Company" height="16px" style="vertical-align:middle"> ADD PUBLISHING COMPANY</button></a>
-    <ol>
-    {% for publishingcompany in all_publishingcompanies %}
-        {% if request.user.id == publishingcompany.user_id %}
-            <li>
-                <a href="{% url 'songwrytrapp:publishingcompany' publishingcompany.id %}">
-                {{ publishingcompany.name }}
-                </a>
-            </li>
-        {% endif %}
-    {% endfor %}
+    <a href="{% url 'songwrytrapp:publishingcompany_form' %}"><button class="plusminus_button margin-bottom-10"><img src="{% static "img/plus.png" %}" alt="Add Publishing Company" height="32px" style="vertical-align:middle"> ADD PUBLISHING COMPANY</button></a>
+    {% if all_publishingcompanies %} <input type="text" id="myInput" onkeyup="search()" placeholder="Search for publishing companies..."> {% endif %}
+    <ol id="myOL">
+        {% for publishingcompany in all_publishingcompanies %}
+            {% if request.user.id == publishingcompany.user_id %}
+                <li>
+                    <a href="{% url 'songwrytrapp:publishingcompany' publishingcompany.id %}">
+                    {{ publishingcompany.name }}
+                    </a>
+                </li>
+            {% endif %}
+        {% endfor %}
     </ol>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'scripts/search.js' %}"></script>
 {% endblock %}

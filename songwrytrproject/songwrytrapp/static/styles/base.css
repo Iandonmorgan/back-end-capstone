@@ -2,34 +2,158 @@ body {
     margin: 0;
     padding: 0;
     font-size: 1.5em;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.recording_columns {
+    display: flex;
+    align-items: flex-end;
+}
+
+#recording_item {
+    border: 1px;
+    background-color: lightgray;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+
+.recent_recording_image {
+    border-radius: 5px 0 0 5px;
+}
+
+.dashboard_header {
+    font-size: 1.5em;
+}
+
+.recording {
+    display: flex;
+    flex-direction: column;
+}
+
+.right_column {
+    font-size: 1em;
+    margin: 0 0 5px 5px;
 }
 
 .main-content {
     padding: 1em 2em;
 }
 
-.navList {
+/* .navList {
     list-style-type: none;
     display: flex;
+    align-items: center;
     border: 1px solid lightgray;
     padding: 1em;
     margin: 0;
+} */
+
+.logout {
+    display: flex;
+    justify-content: flex-end;
 }
 
-.navList__route {
+/* .navList__route {
     margin: 0 0.5em;
-}
+    display: flex;
+} */
 
 button {
     cursor: pointer;
 }
 
-.plusminus_button {
+.plusminus_button, .edit_button {
     background-color: Transparent;
     background-repeat:no-repeat;
     border: none;
     cursor:pointer;
     overflow: hidden;
     outline:none;
+    margin: 0 10px 0 0;
+    padding: 0;
 }
+
+.margin-bottom-10 {
+    margin-bottom: 10px;
+}
+
+.margin-bottom-0 {
+    margin-bottom: 0;
+}
+
+.details-buttons {
+    display: flex;
+    flex-flow: row wrap;
+    align-content: space-between;
+}
+
+.detail-button {
+    margin: 0 20px 20px 0px;
+}
+
+.infotext, .composition_details {
+    font-size: .6em;
+}
+
+.recent_composition {
+    margin-top: 10px;
+}
+
+#showhide, #showhide2, #showhide3, #showhide4 {
+    display: none;
+}
+
+.clickshowhide {
+    font-size: .8em;
+    font-weight: bold;
+}
+
+.underline {
+    text-decoration: underline;
+}
+.clickshowhide:hover {
+    cursor: pointer;
+}
+
+.composition_songwriters:last-child {
+    display: none;
+}
+
+.composition_pubco:last-child {
+    display: none;
+}
+
+/* SEARCH BAR STYLING */
+
+#myInput {
+    background-image: url('/css/searchicon.png'); /* Add a search icon to input */
+    background-position: 10px 12px; /* Position the search icon */
+    background-repeat: no-repeat; /* Do not repeat the icon image */
+    width: 100%; /* Full-width */
+    font-size: 16px; /* Increase font-size */
+    padding: 12px 20px 12px 40px; /* Add some padding */
+    border: 1px solid #ddd; /* Add a grey border */
+    margin-bottom: 12px; /* Add some space below the input */
+  }
+  
+  #myOL {
+    /* Remove default list styling */
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  #myOL li a {
+    border: 1px solid #ddd; /* Add a border to all links */
+    margin-top: -1px; /* Prevent double borders */
+    background-color: #f6f6f6; /* Grey background color */
+    padding: 12px; /* Add some padding */
+    text-decoration: none; /* Remove default text underline */
+    font-size: 18px; /* Increase the font-size */
+    color: black; /* Add a black text color */
+    display: block; /* Make it into a block element to fill the whole list */
+  }
+  
+  #myOL li a:hover:not(.header) {
+    background-color: #eee; /* Add a hover effect to all links, except for headers */
+  }

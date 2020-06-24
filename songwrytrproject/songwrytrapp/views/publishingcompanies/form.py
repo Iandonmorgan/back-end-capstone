@@ -13,7 +13,12 @@ def get_publishingcompanies():
 
         db_cursor.execute("""
         SELECT
-            pc.*,
+            pc.id,
+            pc.user_id,
+            pc.name,
+            pc.pro_id,
+            pc.pro_acct_num,
+            pc.admin,
             p.name as 'PRO_Name',
             p.city as 'PRO_City',
             p.state as 'PRO_State',
@@ -32,7 +37,13 @@ def get_pros():
 
         db_cursor.execute("""
         SELECT
-            p.*
+            p.id,
+            p.name,
+            p.address,
+            p.city,
+            p.state,
+            p.zipcode,
+            p.website
         FROM songwrytrapp_pro p
         """)
 

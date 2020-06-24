@@ -13,12 +13,42 @@ def get_writer(writer_id):
 
         db_cursor.execute("""
         SELECT
-            w.*
+            w.id,
+            w.user_id,
+            w.first_name,
+            w.last_name,
+            w.publishing_notes,
+            w.pro_id,
+            w.pro_ipi
         FROM songwrytrapp_writer w
         WHERE w.id = ?
         """, (writer_id,))
 
         return db_cursor.fetchone()
+
+def get_composition_writers(writer_id):
+    with sqlite3.connect(Connection.db_path) as conn:
+        conn.row_factory = model_factory(Writer)
+        db_cursor = conn.cursor()
+
+        db_cursor.execute("""
+        SELECT
+            w.id,
+            w.first_name,
+            w.last_name,
+            w.user_id,
+            cw.percentage,
+            cw.id as compositionwriter_id
+        FROM songwrytrapp_composition c
+        JOIN songwrytrapp_compositionwriter cw
+        ON cw.composition_id = c.id
+        JOIN songwrytrapp_writer w
+        ON w.id = cw.writer_id
+        WHERE w.id = ?
+        ORDER BY w.last_name
+        """, (writer_id,))
+
+        return db_cursor.fetchall()
 
 @login_required
 def writer_details(request, writer_id):
@@ -41,7 +71,12 @@ def writer_details(request, writer_id):
         ):
             with sqlite3.connect(Connection.db_path) as conn:
                 db_cursor = conn.cursor()
-
+                composition_writers = get_composition_writers(writer_id)
+                for cw in composition_writers:
+                    db_cursor.execute("""
+                    DELETE FROM songwrytrapp_compositionwriter
+                    WHERE id = ?
+                    """, (cw.compositionwriter_id,))
                 db_cursor.execute("""
                 DELETE FROM songwrytrapp_writer
                 WHERE id = ?
@@ -72,4 +107,4 @@ def writer_details(request, writer_id):
                     writer_id,
                 ))
 
-            return redirect(reverse('songwrytrapp:writers'))
+            return redirect(reverse('songwrytrapp:writer', args=[writer_id]))

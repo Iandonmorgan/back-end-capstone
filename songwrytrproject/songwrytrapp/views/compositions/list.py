@@ -9,14 +9,21 @@ def composition_list(request):
     if request.method == 'GET':
         with sqlite3.connect(Connection.db_path) as conn:
             conn.row_factory = model_factory(Composition)
-            
+            user_id = request.user.id
             db_cursor = conn.cursor()
             db_cursor.execute("""
             SELECT
-                c.*
+                c.id,
+                c.user_id,
+                c.title,
+                c.alt_titles,
+                c.lyrics,
+                c.notes,
+                c.date_created
             FROM songwrytrapp_composition c
+            WHERE c.user_id = ?
             ORDER BY c.title
-            """)
+            """, (user_id,))
 
             all_compositions = db_cursor.fetchall()
 

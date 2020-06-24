@@ -17,6 +17,19 @@
     font-size: 1.1em;
 }
 
+.header {
+    margin: 0;
+}
+
 .writer__description {
     font-size: 0.75em;
+}
+
+ol li {
+    list-style-type: none;
+}
+
+ol {
+    margin: 0;
+    padding: 0;
 }

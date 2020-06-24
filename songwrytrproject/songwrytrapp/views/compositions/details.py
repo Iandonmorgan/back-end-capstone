@@ -58,7 +58,12 @@ def get_composition_publishers(composition_id):
 
         db_cursor.execute("""
         SELECT
-            pc.*,
+            pc.id,
+            pc.user_id,
+            pc.name,
+            pc.pro_id,
+            pc.pro_acct_num,
+            pc.admin,
             cpc.percentage,
             cpc.pro_work_num,
             p.name as pro,
@@ -83,7 +88,19 @@ def get_composition_recordings(composition_id):
 
         db_cursor.execute("""
         SELECT
-            r.*,
+            r.id,
+            r.user_id,
+            r.audio_url,
+            r.producer,
+            r.artist,
+            r.recording_type,
+            r.date_recorded,
+            r.is_mixed,
+            r.is_mastered,
+            r.is_delivered,
+            r.composition_id,
+            r.image_url,
+            r.ownership_split,
             STRFTIME('%m/%d/%Y',r.date_recorded) as date_refactored
         FROM songwrytrapp_composition c
         JOIN songwrytrapp_recording r
@@ -112,7 +129,9 @@ def composition_details(request, composition_id):
         return render(request, template, context)
     elif request.method == 'POST':
         form_data = request.POST
-
+        composition_writers = get_composition_writers(composition_id)
+        composition_publishingcompanies = get_composition_publishers(composition_id)
+        composition_recordings = get_composition_recordings(composition_id)
         # Check if this POST is for deleting a composition
         if (
             "actual_method" in form_data
@@ -120,7 +139,21 @@ def composition_details(request, composition_id):
         ):
             with sqlite3.connect(Connection.db_path) as conn:
                 db_cursor = conn.cursor()
-
+                for cw in composition_writers:
+                    db_cursor.execute("""
+                    DELETE FROM songwrytrapp_compositionwriter
+                    WHERE id = ?
+                    """, (cw.compositionwriter_id,))
+                for cpc in composition_publishingcompanies:
+                    db_cursor.execute("""
+                    DELETE FROM songwrytrapp_compositionpublishing
+                    WHERE id = ?
+                    """, (cpc.compositionpublishing_id,))
+                for cr in composition_recordings:
+                    db_cursor.execute("""
+                    DELETE FROM songwrytrapp_recording
+                    WHERE id = ?
+                    """, (cr.id,))
                 db_cursor.execute("""
                 DELETE FROM songwrytrapp_composition
                 WHERE id = ?
@@ -151,4 +184,4 @@ def composition_details(request, composition_id):
                     composition_id,
                 ))
 
-            return redirect(reverse('songwrytrapp:compositions'))
+            return redirect(reverse('songwrytrapp:composition', args=[composition_id]))

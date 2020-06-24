@@ -5,30 +5,26 @@
 <head>
     <meta charset="utf-8">
     <title>SONGWRYTR</title>
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" />
     <link rel="stylesheet" href="{% static 'styles/base.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles/bootstrap.min.css' %}" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     {% block css %}
     {% endblock %}
 </head>
 
 <body>
 
-    {% if request.user.id %}
-        <nav id="site-nav">
-            <ol class="navList">
-                <li class="navList__route"><a href="{% url 'songwrytrapp:home'%}"><img src="{% static "img/songwrytr_logo_sm.png" %}" alt="SONGWRYTR" height="50px"></a></li>
-                <li class="navList__route"><a href="{% url 'songwrytrapp:writers' %}">Writers</a></li>
-                <li class="navList__route"><a href="{% url 'songwrytrapp:compositions' %}">Compositions</a></li>
-                <li class="navList__route"><a href="{% url 'songwrytrapp:publishingcompanies' %}">Publishing</a></li>
-                <li class="navList__route"><a href="{% url 'songwrytrapp:logout' %}">Logout</a></li>
-            </ol>
-        </nav>
-    {% endif %}
+    {% block navbar %}
+    {% endblock %}
 
     <main class="main-content">
         {% block content %}
         {% endblock %}
     </main>
 
+    <script src="{% static 'scripts/jquery-3.3.1.slim.min.js' %}" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="{% static 'scripts/popper.min.js' %}" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="{% static 'scripts/bootstrap.min.js' %}" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     {% block scripts %}
     {% endblock scripts %}
 </body>
