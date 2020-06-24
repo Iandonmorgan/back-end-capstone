@@ -42,7 +42,7 @@
         </form>
       </div>
       <div class="detail-button">
-        <form action="{% url 'songwrytrapp:composition' composition.id %}" method="POST" onsubmit="return ConfirmDelete()">
+        <form action="{% url 'songwrytrapp:composition' composition.id %}" method="POST" onsubmit="return ConfirmDeleteComposition()">
           {% csrf_token %}
           <input type="hidden" name="actual_method" value="DELETE">
           <button>Delete</button>

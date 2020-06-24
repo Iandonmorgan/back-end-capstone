@@ -41,7 +41,7 @@
         </form>
       </div>
       <div class="detail-button">
-        <form action="{% url 'songwrytrapp:publishingcompany' publishingcompany.id %}" method="POST" onsubmit="return ConfirmDelete()">
+        <form action="{% url 'songwrytrapp:publishingcompany' publishingcompany.id %}" method="POST" onsubmit="return ConfirmDeletePublishingCompany()">
           {% csrf_token %}
           <input type="hidden" name="actual_method" value="DELETE">
           <button>Delete</button>
