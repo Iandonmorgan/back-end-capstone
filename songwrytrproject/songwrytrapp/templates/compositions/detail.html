@@ -84,21 +84,24 @@
       <label for="collapsible3" class="lbl-toggle">Writer Share</label>
       <div class="collapsible-content">
         <div class="content-inner">
-          <ul style="list-style: none;">
+          <div style="list-style: none;">
             {% for writer in composition_writers %}
-                {% if request.user.id == writer.user_id %}
-                    <li class="cwli">
-                        <form class="compositionWriter" action="{% url 'songwrytrapp:composition_writer_remove' composition.id writer.compositionwriter_id %}" method="POST">
-                        <a href="{% url 'songwrytrapp:writer' writer.id %}">{{ writer.first_name }} {{ writer.last_name }}</a><div class="cwli_object">{{ writer.percentage }}%</div>
-                          {% csrf_token %}
-                          <input type="hidden" name="actual_method" value="DELETE">
-                          <button class="plusminus_button"><img src="{% static "img/minus.png" %}" alt="Remove Writer" height="16px"></button>
-                        </form>
-                    </li>
-                {% endif %}
+              {% if request.user.id == writer.user_id %}
+                <div class="cwli">
+                  <a href="{% url 'songwrytrapp:writer' writer.id %}">{{ writer.first_name }} {{ writer.last_name }}</a><div class="cwli_object">{{ writer.percentage }}%</div>
+                  <div class="details-buttons">
+                    <a href="{% url 'songwrytrapp:composition_writer_edit_form' composition.id writer.compositionwriter_id %}"><button class="edit_button"><img src="{% static "img/edit.png" %}" alt="Edit Composition Writer" height="16px" style="vertical-align:middle"></button></a>
+                    <form class="compositionWriter" action="{% url 'songwrytrapp:composition_writer_remove' composition.id writer.compositionwriter_id %}" method="POST">
+                      {% csrf_token %}
+                      <input type="hidden" name="actual_method" value="DELETE">
+                      <button class="plusminus_button"><img src="{% static "img/minus.png" %}" alt="Remove Writer" height="16px"></button>
+                    </form>
+                  </div>
+                </div>
+              {% endif %}
             {% endfor %}
-            <li class="cwli"><a href="{% url 'songwrytrapp:composition_writer_form' composition.id %}"><button class="plusminus_button"><img src="{% static "img/plus.png" %}" alt="Attach Writer" height="16px" style="vertical-align:middle"> ATTACH WRITER</button></a></li>
-          </ul>
+            <div class="cwli"><a href="{% url 'songwrytrapp:composition_writer_form' composition.id %}"><button class="plusminus_button"><img src="{% static "img/plus.png" %}" alt="Attach Writer" height="16px" style="vertical-align:middle"> ATTACH WRITER</button></a></div>
+          </div>
         </div>
       </div>
     </div>
@@ -107,23 +110,24 @@
       <label for="collapsible4" class="lbl-toggle">Publishing Share</label>
       <div class="collapsible-content">
         <div class="content-inner">
-          <ul style="list-style: none;">
+          <div>
             {% for publishingcompany in composition_publishingcompanies %}
                 {% if request.user.id == publishingcompany.user_id %}
-                    <li class="cpcli">
-                        <form class="compositionPublishing" action="{% url 'songwrytrapp:composition_publishing_remove' composition.id publishingcompany.compositionpublishing_id %}" method="POST">
-                        <a href="{% url 'songwrytrapp:publishingcompany' publishingcompany.id %}">{{ publishingcompany.name }}</a><div class="cpcli_object">{{ publishingcompany.percentage }}%</div>{{ publishingcompany.pro }} Work ID: {{ publishingcompany.pro_work_num }}
-                          {% csrf_token %}
-                          <div class="cpcli_object">
+                    <div class="cpcli">
+                      <a href="{% url 'songwrytrapp:publishingcompany' publishingcompany.id %}">{{ publishingcompany.name }}</a><div class="cpcli_object">{{ publishingcompany.percentage }}%</div>{{ publishingcompany.pro }} Work ID: {{ publishingcompany.pro_work_num }}
+                        <div class="details-buttons cpcli_object">
+                          <a href="{% url 'songwrytrapp:composition_publishing_edit_form' composition.id publishingcompany.compositionpublishing_id %}"><button class="edit_button"><img src="{% static "img/edit.png" %}" alt="Edit Composition Publishing Company" height="16px" style="vertical-align:middle"></button></a>
+                          <form class="compositionPublishing" action="{% url 'songwrytrapp:composition_publishing_remove' composition.id publishingcompany.compositionpublishing_id %}" method="POST">
+                            {% csrf_token %}
                             <input type="hidden" name="actual_method" value="DELETE">
                             <button class="plusminus_button"><img src="{% static "img/minus.png" %}" alt="Remove Publishing Company" height="16px"></button>
-                          </div>
-                        </form>
-                    </li>
+                          </form>
+                        </div>
+                    </div>
                 {% endif %}
             {% endfor %}
             <li class="cpcli"><a href="{% url 'songwrytrapp:composition_publishing_form' composition.id %}"><button class="plusminus_button"><img src="{% static "img/plus.png" %}" alt="Attach Publishing Company" height="16px" style="vertical-align:middle"> ATTACH PUBLISHING COMPANY</button></a></li>
-          </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -132,10 +136,10 @@
       <label for="collapsible5" class="lbl-toggle">Recordings</label>
       <div class="collapsible-content">
         <div class="content-inner">
-          <ul style="list-style: none;">
+          <div style="list-style: none;">
             {% for recording in composition_recordings %}
                 {% if request.user.id == recording.user_id %}
-                    <li class="recli">
+                    <div class="recli">
                       <div class="recording">
                         <div class="recording_columns">
                           <div class="left_column">
@@ -179,11 +183,11 @@
                           <button class="plusminus_button"><img src="{% static "img/minus.png" %}" alt="Delete Recording" height="16px"> DELETE RECORDING </button>
                         </form>
                       </div>
-                    </li>
+                    </div>
                 {% endif %}
             {% endfor %}
-            <li class="recli"><a href="{% url 'songwrytrapp:composition_recording_form' composition.id %}"><button class="plusminus_button"><img src="{% static "img/plus.png" %}" alt="Add Recording" height="16px" style="vertical-align:middle"> ADD RECORDING</button></a></li>
-          </ul>
+            <div class="recli"><a href="{% url 'songwrytrapp:composition_recording_form' composition.id %}"><button class="plusminus_button"><img src="{% static "img/plus.png" %}" alt="Add Recording" height="16px" style="vertical-align:middle"> ADD RECORDING</button></a></li>
+          </div>
         </div>
       </div>
     </div>

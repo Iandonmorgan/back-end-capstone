@@ -6,7 +6,7 @@ const ConfirmDelete = () => {
     return false;
 }
 const ConfirmDeleteComposition = () => {
-  var x = confirm("Are you sure you want to delete this composition? This is a pretty big deal, as it will delete all of the attached relationships including recordings. This cannot be undone.");
+  var x = confirm("Are you sure you want to delete this composition? Clicking OK will delete the composition and all of the attached relationships including recordings information. This cannot be undone.");
   if (x)
       return true;
   else

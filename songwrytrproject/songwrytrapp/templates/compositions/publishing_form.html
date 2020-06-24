@@ -32,8 +32,14 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Attach publishing company for "{{ composition.title }}"</h1>
-    <form action="{% url 'songwrytrapp:composition_publishing_form' composition.id %}" method="post">
+    {% if compositionpublishing.id is not None %}
+        <h1>Update Publishing Company Share for "{{ composition.title }}"</h1>
+        <form action="{% url 'songwrytrapp:composition_publishing_edit_form' composition.id compositionpublishing.id %}" method="post">
+          <input type="hidden" name="actual_method" value="PUT">
+    {% else %}
+        <h1>Attach publishing company for "{{ composition.title }}"</h1>
+        <form action="{% url 'songwrytrapp:composition_publishing_form' composition.id %}" method="post">
+    {% endif %}
       {% csrf_token %}
       <fieldset>
           <label for="publishingcompany">Publishing Company: </label>
@@ -41,18 +47,18 @@
             <option value="" selected>Select Publishing Company</option>
             {% for publishingcompany in all_publishers %}
                 {% if request.user.id == publishingcompany.user_id %}
-                    <option value="{{ publishingcompany.id }}">{{ publishingcompany.name }}</option>
+                    <option value="{{ publishingcompany.id }}" {% if publishingcompany.id == compositionpublishing.publishing_company_id %}selected{% endif %}>{{ publishingcompany.name }}</option>
                 {% endif %}
             {% endfor %}
           </select>
       </fieldset>
       <fieldset>
           <label for="percentage">Percentage: </label>
-          <input id="percentage" type="number" name="percentage" min="0" max="{{totalpct}}" required>
+          <input id="percentage" type="number" name="percentage" min="0" max="{{totalpct}}" required value="{{ compositionpublishing.percentage }}">
       </fieldset>
       <fieldset>
           <label for="pro_work_num">PRO Work ID: </label>
-          <input id="pro_work_num" type="text" name="pro_work_num">
+          <input id="pro_work_num" type="text" name="pro_work_num" value="{{ compositionpublishing.pro_work_num }}">
       </fieldset>
       <input type="submit" value="Submit" />
     </form>

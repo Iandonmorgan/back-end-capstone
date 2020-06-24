@@ -14,6 +14,11 @@ body {
     border: 1px;
     background-color: lightgray;
     margin: 10px 0;
+    border-radius: 5px;
+}
+
+.recent_recording_image {
+    border-radius: 5px 0 0 5px;
 }
 
 .dashboard_header {
@@ -94,7 +99,7 @@ button {
     margin-top: 10px;
 }
 
-#showhide {
+#showhide, #showhide2, #showhide3, #showhide4 {
     display: none;
 }
 

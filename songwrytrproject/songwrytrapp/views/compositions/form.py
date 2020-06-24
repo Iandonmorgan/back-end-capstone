@@ -1,7 +1,7 @@
 import sqlite3
 from django.shortcuts import render, redirect, reverse
 from django.contrib.auth.decorators import login_required
-from songwrytrapp.models import Composition, Writer, Recording, model_factory
+from songwrytrapp.models import Composition, Writer, Recording, CompositionPublishing, CompositionWriter, model_factory
 from ..connection import Connection
 from .details import get_composition, get_composition_writers, get_composition_publishers, get_composition_recordings
 from django.utils.datastructures import MultiValueDictKeyError
@@ -90,6 +90,41 @@ def get_recording(recording_id):
 
         return db_cursor.fetchone()
 
+def get_compositionpublishing(compositionpublishing_id):
+    with sqlite3.connect(Connection.db_path) as conn:
+        conn.row_factory = model_factory(CompositionPublishing)
+        db_cursor = conn.cursor()
+
+        db_cursor.execute("""
+        SELECT
+            cp.id,
+            cp.composition_id,
+            cp.publishing_company_id,
+            cp.percentage,
+            cp.pro_work_num
+        FROM songwrytrapp_compositionpublishing cp
+        WHERE cp.id = ?
+        """, (compositionpublishing_id,))
+
+        return db_cursor.fetchone()
+
+def get_compositionwriter(compositionwriter_id):
+    with sqlite3.connect(Connection.db_path) as conn:
+        conn.row_factory = model_factory(CompositionWriter)
+        db_cursor = conn.cursor()
+
+        db_cursor.execute("""
+        SELECT
+            cw.id,
+            cw.composition_id,
+            cw.writer_id,
+            cw.percentage
+        FROM songwrytrapp_compositionwriter cw
+        WHERE cw.id = ?
+        """, (compositionwriter_id,))
+
+        return db_cursor.fetchone()
+
 @login_required
 def composition_form(request):
     if request.method == 'GET':
@@ -166,6 +201,47 @@ def composition_writer_form(request, composition_id):
             return redirect(reverse('songwrytrapp:composition', args=[composition_id]))
 
 @login_required
+def composition_writer_edit_form(request, composition_id, compositionwriter_id):
+
+    if request.method == 'GET':
+        composition = get_composition(composition_id)
+        composition_writers = get_composition_writers(composition_id)
+        all_writers = get_writers()
+        compositionwriter = get_compositionwriter(compositionwriter_id)
+        totalpct = 100
+        for cw in composition_writers:
+            totalpct -= cw.percentage
+        totalpct += compositionwriter.percentage
+        template = 'compositions/writer_form.html'
+        context = {
+            'composition': composition,
+            'all_writers': all_writers,
+            'totalpct': totalpct,
+            'compositionwriter': compositionwriter
+        }
+
+        return render(request, template, context)
+    elif request.method == 'POST':
+        form_data = request.POST
+        # Check if this POST is for editing a composition writer share
+        with sqlite3.connect(Connection.db_path) as conn:
+            db_cursor = conn.cursor()
+
+            db_cursor.execute("""
+            UPDATE songwrytrapp_compositionwriter
+                SET writer_id = ?,
+                    percentage = ?,
+                    composition_id = ?
+                WHERE id = ?
+                """,
+                (
+                    form_data['writer'], form_data['percentage'],
+                    composition_id, compositionwriter_id
+                ))
+
+        return redirect(reverse('songwrytrapp:composition', args=[composition_id]))
+
+@login_required
 def composition_publishing_form(request, composition_id):
 
     if request.method == 'GET':
@@ -186,7 +262,7 @@ def composition_publishing_form(request, composition_id):
         return render(request, template, context)
     elif request.method == 'POST':
         form_data = request.POST
-        # Check if this POST is for deleting a composition
+        # Check if this POST is for deleting a composition publishing company share
         if (
             "actual_method" in form_data
             and form_data["actual_method"] == "DELETE"
@@ -213,6 +289,53 @@ def composition_publishing_form(request, composition_id):
                 """,
                 (form_data['publishingcompany'], form_data['percentage'],
                     form_data['pro_work_num'], composition_id))
+
+            return redirect(reverse('songwrytrapp:composition', args=[composition_id]))
+
+@login_required
+def composition_publishing_edit_form(request, composition_id, compositionpublishing_id):
+
+    if request.method == 'GET':
+        composition = get_composition(composition_id)
+        composition_publishers = get_composition_publishers(composition_id)
+        all_publishers = get_publishers()
+        compositionpublishing = get_compositionpublishing(compositionpublishing_id)
+        totalpct = 100
+        for cp in composition_publishers:
+            totalpct -= cp.percentage
+        totalpct += compositionpublishing.percentage
+        template = 'compositions/publishing_form.html'
+        context = {
+            'composition': composition,
+            'all_publishers': all_publishers,
+            'composition_publishers': composition_publishers,
+            'totalpct': totalpct,
+            'compositionpublishing': compositionpublishing
+        }
+
+        return render(request, template, context)
+    elif request.method == 'POST':
+        form_data = request.POST
+        # Check if this POST is for editing a composition publishing company share
+        if (
+            "actual_method" in form_data
+            and form_data["actual_method"] == "PUT"
+        ):
+            with sqlite3.connect(Connection.db_path) as conn:
+                db_cursor = conn.cursor()
+
+                db_cursor.execute("""
+                UPDATE songwrytrapp_compositionpublishing
+                SET publishing_company_id = ?,
+                    percentage = ?,
+                    pro_work_num = ?,
+                    composition_id = ?
+                WHERE id = ?
+                """,
+                (
+                    form_data['publishingcompany'], form_data['percentage'],
+                    form_data['pro_work_num'], composition_id, compositionpublishing_id
+                ))
 
             return redirect(reverse('songwrytrapp:composition', args=[composition_id]))
 

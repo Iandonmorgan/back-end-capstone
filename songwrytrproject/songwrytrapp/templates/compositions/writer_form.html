@@ -32,8 +32,14 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Attach writer for "{{ composition.title }}"</h1>
-    <form action="{% url 'songwrytrapp:composition_writer_form' composition.id %}" method="post">
+    {% if compositionwriter.id is not None %}
+        <h1>Update Writer Share for "{{ composition.title }}"</h1>
+        <form action="{% url 'songwrytrapp:composition_writer_edit_form' composition.id compositionwriter.id %}" method="post">
+          <input type="hidden" name="actual_method" value="PUT">
+    {% else %}
+        <h1>Attach writer for "{{ composition.title }}"</h1>
+        <form action="{% url 'songwrytrapp:composition_writer_form' composition.id %}" method="post">
+    {% endif %}
       {% csrf_token %}
       <fieldset>
           <label for="writer">Writer: </label>
@@ -41,14 +47,14 @@
             <option value="" selected>Select Writer</option>
             {% for writer in all_writers %}
                 {% if request.user.id == writer.user_id %}
-                    <option value="{{ writer.id }}">{{ writer.first_name }} {{ writer.last_name }}</option>
+                    <option value="{{ writer.id }}" {% if writer.id == compositionwriter.writer_id %}selected{% endif %}>{{ writer.first_name }} {{ writer.last_name }}</option>
                 {% endif %}
             {% endfor %}
           </select>
       </fieldset>
       <fieldset>
           <label for="percentage">Percentage: </label>
-          <input id="percentage" type="number" name="percentage" min="0" max="{{totalpct}}" required>
+          <input id="percentage" type="number" name="percentage" min="0" max="{{totalpct}}" required value="{{ compositionwriter.percentage }}">
       </fieldset>
       <input type="submit" value="Submit" />
     </form>
