@@ -54,7 +54,7 @@
       </fieldset>
       <fieldset>
           <label for="percentage">Percentage: </label>
-          <input id="percentage" type="number" name="percentage" min="0" max="{{totalpct}}" required value="{{ compositionwriter.percentage }}">
+          <input id="percentage" type="number" name="percentage" step="0.01" min="0" max="{{totalpct}}" required value="{{ compositionwriter.percentage }}">
       </fieldset>
       <input type="submit" value="Submit" />
     </form>
