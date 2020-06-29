@@ -1,4 +1,4 @@
-![SONGWRYTR](./songwrytr_logo.png)
+![SONGWRYTR](./songwrytr_logo_whitebg.png)
 
 A back-end capstone project from [Landon Morgan](https://github.com/iandonmorgan) for [Nashville Software School Web Development Cohort 38](https://github.com/nss-day-cohort-38)
 
