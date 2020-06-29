@@ -16,7 +16,9 @@ The first time a user logs in, their dashboard is empty, but for users with data
 
 Inside a composition, a user can attach or remove Writers and Publishing Companies, designating a percentage split based on their writing arrangement, as well as CRUD functionality for information tied to a recording of that composition, including link to recording audio, artwork. Info can be entered for all recordings on a specific composition, as a way to track recorded versions of a song.
 
-<img align="bottom" src="./transparent.png" height="200px" width="1px">
+I built SONGWRYTR in a way that limits writer splits to 100%, and publishing splits to 100%, for a total of 200%. Performance Rights Organizations, like BMI and ASCAP will manage split information differently, but the logic is effectively the same and I followed something closer resembling BMI’s method in creating my app.
+
+To create ‘SONGWRYTR’ I used the front end languages: [HTML5](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5), [CSS3](https://developer.mozilla.org/en-US/docs/Web/CSS), and [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript). Those power a lot of what you’re seeing, along with [Bootstrap](https://getbootstrap.com/docs/3.4/javascript/) for styling. Behind the scenes, I used [Python](https://docs.python.org/3/) with [Django](https://docs.djangoproject.com/en/3.0/) framework as my backend languages. Additional technologies I used were [git](https://git-scm.com/doc), [GitHub](https://github.com/), [TablePlus](https://tableplus.com/) and [SQLite3](https://www.sqlite.org/docs.html) to manage my [SQL](https://www.w3schools.com/sql/) database, and [VSCode](https://code.visualstudio.com/) as my code editor.
 
 ## Brief Proposal
 
