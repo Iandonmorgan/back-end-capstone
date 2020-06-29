@@ -10,7 +10,7 @@ A user can create an account, log-in, and enter data for Writers, Publishing Com
 
 ## Navigating the Dashboard and Composition Details
 
-![SONGWRYTR Dashboard iPhone](./iPhone_SONGWRYTR.png){:style="float: right;margin-right: 7px;margin-top: 7px;"}
+<img align="left" src="./iPhone_SONGWRYTR.png" alt="SONGWRYTR Dashboard iPhone">
 
 The first time a user logs in, their dashboard is empty, but for users with data entered, the dashboard will display the most recent 5 recordings recorded and most recent 5 compositions written. The dashboard can be accessed by clicking the SONGWRYTR logo in the top left corner, if navigating other parts of the app.
 
