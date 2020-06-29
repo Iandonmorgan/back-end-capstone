@@ -8,9 +8,9 @@ A back-end capstone project from [Landon Morgan](https://github.com/iandonmorgan
 
 A user can create an account, log-in, and enter data for Writers, Publishing Companies, and Compositions. User-specific data can be created, read, updated, and deleted. Users are able to search compositions based on titles, lyrics, and notes entered.
 
+<img align="right" src="./iPhone_SONGWRYTR.png" alt="SONGWRYTR Dashboard iPhone" height="300px">
 
 ## Navigating the Dashboard and Composition Details
-<img align="right" src="./iPhone_SONGWRYTR.png" alt="SONGWRYTR Dashboard iPhone" height="300px">
 
 The first time a user logs in, their dashboard is empty, but for users with data entered, the dashboard will display the most recent 5 recordings recorded and most recent 5 compositions written. The dashboard can be accessed by clicking the SONGWRYTR logo in the top left corner, if navigating other parts of the app.
 
