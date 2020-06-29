@@ -10,12 +10,11 @@ A user can create an account, log-in, and enter data for Writers, Publishing Com
 
 
 ## Navigating the Dashboard and Composition Details
-<img align="right" src="./iPhone_SONGWRYTR.png" alt="SONGWRYTR Dashboard iPhone">
+<img align="right" src="./iPhone_SONGWRYTR.png" alt="SONGWRYTR Dashboard iPhone" height="300px">
 
 The first time a user logs in, their dashboard is empty, but for users with data entered, the dashboard will display the most recent 5 recordings recorded and most recent 5 compositions written. The dashboard can be accessed by clicking the SONGWRYTR logo in the top left corner, if navigating other parts of the app.
 
 Inside a composition, a user can attach or remove Writers and Publishing Companies, designating a percentage split based on their writing arrangement, as well as CRUD functionality for information tied to a recording of that composition, including link to recording audio, artwork. Info can be entered for all recordings on a specific composition, as a way to track recorded versions of a song.
-</img>
 
 ## Brief Proposal
 
