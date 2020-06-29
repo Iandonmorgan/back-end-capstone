@@ -4,11 +4,9 @@ A back-end capstone project from [Landon Morgan](https://github.com/iandonmorgan
 
 ![SONGWRYTR Compositions Macbook Air](./macbook_SONGWRYTR.png)
 
-## Navigating Account Creation, Log-In, and Entering Data
+## Using SONGWRYTR
 
 A user can create an account, log-in, and enter data for Writers, Publishing Companies, and Compositions. User-specific data can be created, read, updated, and deleted. Users are able to search compositions based on titles, lyrics, and notes entered.
-
-## Navigating the Dashboard and Composition Details
 
 <img align="left" src="./iPhone_SONGWRYTR.png" alt="SONGWRYTR Dashboard iPhone">
 
