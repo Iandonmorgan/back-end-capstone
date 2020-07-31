@@ -2,6 +2,8 @@
 
 A back-end capstone project from [Landon Morgan](https://github.com/iandonmorgan) for [Nashville Software School Web Development Cohort 38](https://github.com/nss-day-cohort-38)
 
+[![Watch the video](./songwrytr_video_thumbnail.png)](https://youtu.be/0G1_P_PBY3g)
+
 ![SONGWRYTR Compositions Macbook Air](./macbook_SONGWRYTR.png)
 
 ## Using SONGWRYTR
